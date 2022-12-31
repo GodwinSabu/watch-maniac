@@ -1,0 +1,92 @@
+<div class="row text-center pt-3">
+    <div class="col-lg-6 m-auto">
+        <br>
+        <h1 class="h1">Categories of This product</h1>
+        <p>
+            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+            deserunt mollit anim id est laborum.
+        </p>
+    </div>
+</div>
+<div class="row">
+    {{#each category}}
+    <div class="col-12 col-md-4 p-5 mt-3">
+        <a href="#"><img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-Mk61joBSYUU8ka9SXGOIwjNS-FT7Xa5jcw&usqp=CAUg"
+                class="rounded-circle img-fluid border"> </a>
+        <h5 class="text-center mt-3 mb-3">{{this.category}}</h5>
+        <p class="text-center"><a href="/users/catpro/{{this.category}}" class="btn btn-success">Go Shop</a></p>
+    </div>
+
+    {{/each}}
+</div>
+</section>
+{{!-- <section>
+    <div class="container mt-5 p-5">
+        <div class="row"> --}}
+            {{!-- {{#each products}}
+            <div class="card" style="width: 16rem;">
+                <img style="width: 14rem ; height: auto;" src="/product-images/{{this._id}}.jpg" class="card-img-top"
+                    alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{this.name}}</h5>
+                    <p class="card-text">{{this.category}}</p>
+                    <h4 class="card-title">{{this.price}}</h4>
+                    <h4 class="card-title">{{this.offerprice}}</h4>
+                    <a href="/users/product-details/{{this._id}}">view-product-details</a>
+                    <button class="btn btn-dark" onclick="addtocart('{{this._id}}')">Add to Cart</button>
+                </div>
+            </div>
+
+            {{/each}} --}}
+            {{!-- <section> --}}
+                <section>
+                    <div class="position-fixed w-25 d-none" id="success"
+                        style="left:530px; top: 100px; z-index: 1000; background-color:black; border-radius:10px;">
+                        <p id="success-text" class="text-center mt-3" style="color:white;">Added to
+                            Cart</p>
+                    </div>
+                    <div class="position-fixed w-25 d-none" id="wishSuccess"
+                        style="left:530px; top: 100px; z-index: 1000; background-color:black; border-radius:10px;">
+                        <p id="success-text" class="text-center mt-3" style="color:white;">Added to
+                            Wishlist</p>
+                    </div>
+                    <div class="container mt-3">
+                        <div class="row">
+                            {{#each categoryProducts}}
+                            <div class="col-lg-3 col-md-6 col-sm-12 ">
+                                <div class="card" style="width: 14rem; margin-top:25px;">
+
+                                    <img style="width:180px; height:180px;" src="{{this.image.[0]}}"
+                                        class="card-img-top mx-auto mt-3" alt="..." />
+
+                                    <div class="card-body">
+                                        <a href="/users/product-details/{{this._id}}"
+                                            style="text-decoration: none; color: black;">{{this.name}}</a>
+                                        <a style="text-decoration: none;" href="/product-details/{{this._id}}">
+                                            <h5>{{this.product}}</h5>
+                                        </a>
+
+
+                                        {{#if this.offerprice}}
+
+                                        <p class="mb-0" style="text-decoration :line-through;">₹{{this.price}}</p>
+                                        <h5>₹{{this.offerprice}}</h5>
+                                        {{else}}
+                                        <h5>₹{{this.price}}</h5>
+                                        {{/if}}
+
+
+
+                                        <button type="button" class="btn btn-dark" style="border-radius: 20; border: 0;"
+                                            onclick="addtocart('{{this._id}}')">Add to Cart</button>
+
+                                        <i class="fa-solid fa-heart float-end" id="wish"
+                                            style="font-size: xx-large; color: rgb(0, 0, 0);;"
+                                            onclick="addToWishlist('{{this._id}}')"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            {{/each}}
+                        </div>
+                    </div>

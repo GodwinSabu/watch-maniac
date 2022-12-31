@@ -1,0 +1,48 @@
+ <div class="container" style="width: 88%; float: left;">
+<table class="table">
+  <thead>
+    <h1>User Data</h1>
+    <tr>
+      <th scope="col">No</th>
+      <th scope="col">Name</th>
+      <th scope="col">Mobile number</th>
+      <th scope="col">E-mail</th>
+      <th scope="col">Status</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each userdata}}
+    <tr>
+      <th scope="row">{{inc @index}}</th>
+      <td>{{this.firstname}} {{this.lastname}}</td>
+      <td>{{this.mobile}}</td>
+      <td>{{this.email}}</td>
+
+      {{#if this.status}}
+      <td>Active</td>
+      {{else}}
+      <td>Not-Active</td>
+      {{/if}}
+
+       <td>
+                        {{#if this.status}}
+                        <a class="btn btn-danger" href="/admin/users/{{this._id}}"
+                            onclick="return confirm('Do you want to deactivate this user')">Block</a>
+                        {{else}}
+                        <a class="btn btn-success" href="/admin/users/{{this._id}}"
+                            onclick="return confirm('Do you want to activate this user')">Unblock</a>
+                        {{/if}}
+                    </td>
+    </tr>
+    {{/each}}
+     <ul class="pagination justify-content-end">
+            {{#each pageCount}}
+            <li class="page-item"><a class="page-link" href="/admin/users?page={{this}}">{{this}}</a></li>
+            {{/each}}
+        </ul>
+
+  </tbody>
+</table> 
+</div>

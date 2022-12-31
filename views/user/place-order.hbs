@@ -1,0 +1,732 @@
+<html lang="en">
+
+{{!--
+
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head> --}}
+
+<body>
+
+
+
+  <div class="container" style="margin-top:7rem;">
+    <div class="row">
+      <div class="col-md-4 order-md-2 mb-4">
+        <h4 class="d-flex justify-content-between align-items-center mb-3">
+          <span class="text-muted">Your cart</span>
+          <span class="badge badge-secondary badge-pill">3</span>
+        </h4>
+        <ul class="list-group mb-3">
+          {{#each cartProducts}}
+          <li class="list-group-item d-flex justify-content-between ">
+            <div>
+              <img style="width:100px;" src="{{this.product.image.[0]}}" alt="Placholder Image 2">
+              <h6 class="my-0">{{this.product.brand}}</h6>
+              <p class="my-0">{{this.product.product}}</p>
+            </div>
+            <span class="col-3">₹{{this.product.offerPrice}} X {{this.quantity}}</span>
+          </li>
+          {{/each}}
+          <li class=" list-group-item d-flex justify-content-between">
+            <span>Total</span>
+            <strong style="">₹ <class="" id="">{{total}}</strong>
+          </li>
+
+          <li class=" list-group-item d-flex justify-content-between">
+            <span>Offer</span>
+            <strong style="color:green;">-₹ <class="" id="coupon-offer"></strong>
+          </li>
+
+          <li class=" list-group-item d-flex justify-content-between">
+            <span>Total (INR)</span>
+            <strong>₹ <span id="final-amount">{{total}}</span>
+            </strong>
+          </li>
+        </ul>
+        <form class="card p-2" id="redeem-coupon" method="post">
+
+          <div><small style="color:red;" id="coupon-condition"></small></div>
+
+          <div class="input-group">
+            <input type="text" class="form-control" id="coupon-form" name="coupon" placeholder="Coupon code">
+            <div class="input-group-append">
+
+
+              <button type="submit" class="btn btn-secondary">Redeem</button>
+              <div id="coupon-condition"></div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="col-md-8 order-md-1">
+        <h4 class="mb-3">Billing address</h4>
+
+        <div class="d-flex justify-content-end">
+          <button type="button" class="btn btn-primary mb-4" data-bs-toggle="modal" data-bs-target="#exampleModal"
+            data-bs-whatever="@mdo">Add New Address</button>
+        </div>
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Create new Address</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <form action="/users/add-address-checkout" method="post" class="needs-validation" novalidate>
+                  <div class="row gx-3 mb-3">
+                    <div class="col-md-6">
+                      <label class="small mb-1" for="inputFirstName">First name</label>
+                      <input class="form-control" id="firstname" type="text" name="firstname"
+                        placeholder="Enter your first name" value="" required>
+                    </div>
+                    <div class="col-md-6">
+                      <label class="small mb-1" for="inputLastName">Last name</label>
+                      <input class="form-control" id="lastname" type="text" name="lastname"
+                        placeholder="Enter your last name" value="" required>
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <label class="small mb-1" for="inputEmailAddress">Email address</label>
+                    <input class="form-control" id="email" type="email" name="email"
+                      placeholder="Enter your email address" value="" required>
+                  </div>
+                  <div class="mb-3">
+                    <label class="small mb-1" for="inputEmailAddress">Address</label>
+                    <input class="form-control" id="address" type="text" name="address" placeholder="Enter your Address"
+                      value="" required>
+                  </div>
+                  <div class="row gx-3 mb-3">
+                    <div class="col-md-6">
+                      <label class="small mb-1" for="inputPhone">Phone number</label>
+                      <input class="form-control" id="mobile" type="tel" name="mobile"
+                        placeholder="Enter your phone number" value="" required>
+                    </div>
+                    <div class="col-md-6">
+                      <label class="small mb-1" for="inputCountry">Country</label>
+                      <input class="form-control" id="country" type="text" name="country"
+                        placeholder="Enter your Country" value="" required>
+                    </div>
+                  </div>
+                  <div class="row gx-3 mb-3">
+                    <div class="col-md-6">
+                      <label class="small mb-1" for="inputState">State</label>
+                      <input class="form-control" id="state" type="text" name="state" placeholder="Enter your State"
+                        value="" required>
+                    </div>
+                    <div class="col-md-6">
+                      <label class="small mb-1" for="inputDistrict">District</label>
+                      <input class="form-control" id="district" type="text" name="district"
+                        placeholder="Enter your District" value="" required>
+                    </div>
+                  </div>
+                  <div class="row gx-3 mb-3">
+                    <div class="col-md-6">
+                      <label class="small mb-1" for="inputCity">City</label>
+                      <input class="form-control" id="city" type="text" name="city" placeholder="Enter your City"
+                        value="" required>
+                    </div>
+                    <div class="col-md-6">
+                      <label class="small mb-1" for="inputPin">Pincode</label>
+                      <input class="form-control" id="pincode" type="number" name="pincode"
+                        placeholder="Enter your Pincode" value="" required>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Ok</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <form id="checkout-form" method="post">
+          {{#each address}}
+          <div class="grid">
+            <label class="card mb-4">
+              <input name="addressId" value="{{this.address._id}}" class="radio" type="radio" checked>
+
+              <span class="plan-details">
+                <span class="plan-type">{{this.address.firstname}} {{this.address.lastname}}</span>
+                <span class="pt-2">{{this.address.mobile}}</span>
+                <span>{{this.address.email}}</span>
+                <span>{{this.address.address}}</span>
+              </span>
+            </label>
+          </div>
+          {{/each}}
+          <h4 class="mb-3">Choose your Payment Method </h4>
+          <div class="d-block my-3">
+
+
+
+            <div><input type="radio" value="COD" name="payment-method" checked>
+              <strong>Cash on delivery</strong>
+            </div>
+            <br>
+            <div><input type="radio" value="online" name="payment-method">
+              <strong>RezorPay</strong>
+            </div>
+            <br>
+            <div>
+              <input type="radio" value="paypal" name="payment-method">
+              <strong>Paypal</strong>
+            </div>
+            <br>
+            {{!-- <div><input type="radio" value="online" name="payment-method">
+              <strong>wallet</strong>
+            </div>
+            <br> --}}
+            {{#if wallet.walletBalance}}
+            <div>
+              {{!-- <label class="custom-control-label"> --}}
+                <input type="radio" value="wallet" name="payment-method" id="wallet">
+                {{!-- <input name="wallet" type="radio" value="{{wallet.walletBalance}}" id="wallet"> --}}
+                <strong>Usewallet</strong>
+                <strong>(₹{{wallet.walletBalance}})</strong>
+                {{!-- </label>/ --}}
+            </div>
+            {{/if}}
+            <input name="discount" type="hidden" id="discount" value=''>
+            <input name="total" type="hidden" id="totalCheckoutAmount" value="{{total}}">
+          </div>
+          <hr class=" mb-4">
+          <button class="btn btn-dark btn-lg btn-block" type="submit">Continue</button>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+  <style>
+    :root {
+      --card-line-height: 1.2em;
+      --card-padding: 1em;
+      --card-radius: 0.5em;
+      --color-green: #558309;
+      --color-gray: #e2ebf6;
+      --color-dark-gray: #c4d1e1;
+      --radio-border-width: 2px;
+      --radio-size: 1.5em;
+    }
+
+    body {
+      color: #263238;
+      margin: 0;
+    }
+
+    .grid {
+      display: grid;
+      grid-gap: var(--card-padding);
+      margin: 0 auto;
+      max-width: 60em;
+      padding: 0;
+
+      @media (min-width: 42em) {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .card {
+      background-color: #fff;
+      border-radius: var(--card-radius);
+      position: relative;
+
+      &:hover {
+        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.15);
+      }
+    }
+
+    .radio {
+      font-size: inherit;
+      margin: 0;
+      position: absolute;
+      right: calc(var(--card-padding) + var(--radio-border-width));
+      top: calc(var(--card-padding) + var(--radio-border-width));
+    }
+
+    @supports (-webkit-appearance: none) or (-moz-appearance: none) {
+      .radio {
+        background: #fff;
+        border: var(--radio-border-width) solid var(--color-gray);
+        border-radius: 50%;
+        cursor: pointer;
+        height: var(--radio-size);
+        outline: none;
+        transition: background 0.2s ease-out, border-color 0.2s ease-out;
+        width: var(--radio-size);
+
+        &::after {
+          border: var(--radio-border-width) solid #fff;
+          border-top: 0;
+          border-left: 0;
+          content: "";
+          display: block;
+          height: 0.75rem;
+          left: 25%;
+          position: absolute;
+          top: 50%;
+          transform: rotate(45deg) translate(-50%, -50%);
+          width: 0.375rem;
+        }
+
+        &:checked {
+          background: var(--color-green);
+          border-color: var(--color-green);
+        }
+      }
+
+      .card:hover .radio {
+        border-color: var(--color-dark-gray);
+
+        &:checked {
+          border-color: var(--color-green);
+        }
+      }
+    }
+
+    .plan-details {
+      border: var(--radio-border-width) solid var(--color-gray);
+      border-radius: var(--card-radius);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      padding: var(--card-padding);
+      transition: border-color 0.2s ease-out;
+    }
+
+    .card:hover .plan-details {
+      border-color: var(--color-dark-gray);
+    }
+
+    .radio:checked~.plan-details {
+      border-color: var(--color-green);
+    }
+
+    .radio:focus~.plan-details {
+      box-shadow: 0 0 0 2px var(--color-dark-gray);
+    }
+
+    .radio:disabled~.plan-details {
+      color: var(--color-dark-gray);
+      cursor: default;
+    }
+
+    .radio:disabled~.plan-details .plan-type {
+      color: var(--color-dark-gray);
+    }
+
+    .card:hover .radio:disabled~.plan-details {
+      border-color: var(--color-gray);
+      box-shadow: none;
+    }
+
+    .card:hover .radio:disabled {
+      border-color: var(--color-gray);
+    }
+
+    .plan-type {
+      color: var(--color-green);
+      font-size: 1.5rem;
+      font-weight: bold;
+      line-height: 1em;
+    }
+
+    .plan-cost {
+      font-size: 2.5rem;
+      font-weight: bold;
+      padding: 0.5rem 0;
+    }
+
+    .slash {
+      font-weight: normal;
+    }
+
+    .plan-cycle {
+      font-size: 2rem;
+      font-variant: none;
+      border-bottom: none;
+      cursor: inherit;
+      text-decoration: none;
+    }
+
+    .hidden-visually {
+      border: 0;
+      clip: rect(0, 0, 0, 0);
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      padding: 0;
+      position: absolute;
+      white-space: nowrap;
+      width: 1px;
+    }
+  </style>
+
+
+
+
+
+
+
+
+
+  <script>
+    //REDEEM COUPON
+    $('#redeem-coupon').submit((e) => {
+      e.preventDefault()
+      console.log('kjkjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj22222222222')
+      $.ajax({
+        url: '/users/redeem-coupon',
+        method: 'post',
+        data: $('#redeem-coupon').serialize(),
+        success: (response) => {
+          if (!response.msg) {
+            $('#coupon-condition').text("")
+
+            $('#coupon-form').css('border-color', 'green')
+
+            $('#final-amount').text(response.total)
+
+            $('#coupon-offer').text(response.offer)
+
+            
+
+
+          
+            document.getElementById("discount").value= response.offer
+            document.getElementById("totalCheckoutAmount").value=response.total
+
+
+
+            document.getElementById("redeem-coupon").style.display = "none"
+          } else {
+
+            $('#coupon-condition').text(response.msg)
+
+            $('#coupon-form').css('border-color', 'red')
+
+            $('#final-amount').text(response.total)
+
+            $('#coupon-offer').text(response.offer)
+
+            $('#totalCheckoutAmount').val(response.total)
+          }
+        }
+      })
+    })
+
+    $("#checkout-form").submit((e) => {
+      e.preventDefault()
+      console.log('kjkjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj')
+      $.ajax({
+        url: '/users/place-order',
+        method: 'post',
+        data: $('#checkout-form').serialize(),
+        success: (response) => {
+          console.log('kasldddddddddddk')
+          if (response.codSuccess || response.walletSuccess) {
+            swal({
+              title: "Order Placed ",
+              type: 'success',
+              text: "congratulations!! ",
+              icon: "success",
+              confirmButtonColor: "#318a2c",
+              confirmButtonText: "Click here to See the Orders!",
+              closeOnConfirm: false
+            },
+              function (isConfirm) {
+                if (isConfirm) {
+                  location.href = '/users/order-success'          // submitting the form when user press yes
+                }
+              });
+
+          } else if (response.razorpay) {
+            razorpayPayment(response.response)
+            console.log('0000000000fuck yeah')
+          } else if (response.paypal) {
+            location.href = response.url
+          }
+        }
+
+      })
+    })
+
+    function razorpayPayment(order) {
+      console.log(order)
+      console.log('0000000000fuck yeah222')
+      var options = {
+        "key": 'rzp_test_bSUWAytvaSMERx', // Enter the Key ID generated from the Dashboard
+        "amount": order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+        "currency": "INR",
+        "name": "Watchmanic",
+        "description": "Test Transaction",
+        "image": "https://example.com/your_logo",
+        "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+        "handler": function (response) {
+          verifyPayment(response, order)
+        },
+        "prefill": {
+          "name": 'Godwin',
+          "email": 'godu1539@gmail.com',
+          "contact": 9747437792
+        },
+        "notes": {
+          "address": "Razorpay Corporate Office"
+        },
+        "theme": {
+          "color": "#3399cc"
+        }
+
+      };
+      console.log('0000000000f yeah3333')
+      var rzp1 = new Razorpay(options);
+      rzp1.open();
+      console.log('0000000000 yeah4444')
+    }
+
+    function verifyPayment(payment, order) {
+      $.ajax({
+        url: '/users/verify-payment',
+        data: {
+          payment,
+          order
+        },
+        method: 'post',
+        success: (respone) => {
+          if (respone.status) {
+            location.href = '/users/order-success         '
+          } else {
+            alert("Payment Failed")
+          }
+        }
+      })
+    }
+
+
+
+  </script>
+</body>
+<style>
+  .billing_text {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    margin: 0;
+    font-size: 16px;
+    color: #737373;
+  }
+
+  .yourCart_div {}
+
+  .cart_img_content {}
+
+  .food_img_price_des {
+    display: flex;
+    margin-bottom: 1rem;
+  }
+
+  .food_img_price_des .cart_food_img {
+    width: 85px;
+    height: 51px;
+    overflow: hidden;
+    border: 1px solid #d4d4d491;
+    padding: 4px;
+  }
+
+  .food_img_price_des .cart_food_img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .food_img_price_des .food_dec_flex {
+    margin-left: 2rem;
+  }
+
+  .food_img_price_des .food_dec_flex p {
+    color: #737373;
+    margin: 0;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+  }
+
+  .food_img_price_des .food_dec_flex p:last-child {
+    color: red;
+  }
+
+  .yourCart_div {
+    border: 1px solid #d4d4d491;
+    padding: 19px;
+    margin-top: 2rem;
+  }
+
+  .cart_total {}
+
+  .cart_total .price_total {
+    display: flex;
+    margin-bottom: 5px;
+    justify-content: space-between;
+  }
+
+  .cart_total .price_total p {
+    color: #737373;
+    margin: 0;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+  }
+
+  .total_btn_cart {
+    width: 100%;
+    background: #ac1734 !important;
+    border-color: #ac1734 !important;
+    padding: 9px 19px !important;
+    display: flex;
+    justify-content: space-between;
+    color: #fff;
+    font-weight: 500;
+    border-style: unset;
+    font-family: "Montserrat", sans-serif;
+  }
+
+  .total_btn_cart:hover {
+    background-color: #ac1734 !important;
+    border-color: #ac1734 !important;
+  }
+
+  .cart_total {
+    border: 1px solid #d4d4d491;
+    padding: 8px 19px;
+    border-top: 0;
+  }
+
+  .input_form .input_box_cart input,
+  .input_form .input_box_cart textarea {
+    width: 100%;
+    border: 1px solid #d4d4d491;
+    outline: none;
+    padding: 6px 10px;
+    font-weight: 600;
+    font-size: 13px;
+    resize: none;
+    font-family: "Montserrat", sans-serif;
+  }
+
+  .input_form .input_box_cart {
+    margin-bottom: 15px;
+  }
+
+  .mb_23px {
+    margin-bottom: 20px !important;
+  }
+
+  .text_center_button {
+    justify-content: center;
+  }
+
+  .input_form {
+    margin-top: 2rem;
+  }
+
+  .footer-parallax-container {
+    margin-bottom: 0 !important;
+    box-shadow: none;
+    min-height: auto !important;
+  }
+
+  .footer-parallax {
+    height: auto !important;
+    position: relative !important;
+    background-color: #f5f5f5 !important;
+    z-index: 1;
+  }
+
+  .section-bg-image_full_height {
+    background-image: url(../images/hd-8.png);
+    background-attachment: fixed;
+  }
+
+  .mt-12px {
+    margin-top: 12px !important;
+  }
+
+  .bg_green {
+    background-color: #4caf50 !important;
+    border-color: #4caf50 !important;
+  }
+
+  .bg_green:hover {
+    background-color: #4caf50 !important;
+    border-color: #4caf50 !important;
+  }
+
+  button {
+    outline: none !important;
+  }
+</style>
+{{!--
+<script>
+
+  $('#redeem-coupon').submit((e) => {
+    e.preventDefault("coupondiv")
+
+    $.ajax({
+      url: "/users/applycoupon",
+      type: "post",
+      data: $('#redeem-coupon').serialize(),
+      success: (response) => {
+        document.getElementById("redeem-coupon").style.display = "none"
+      }
+    })
+  })
+</script> --}}
+
+{{!-- if (response.err){
+document.getElementById("coupon-error").innerHTML = "Enter Valid Coupon";
+}else{
+swal("Coupon Applied!", "You got Coupon offer", "success");
+console.log(response)
+document.getElementById("coupon-discount").innerHTML = "Discount : $ "+response.discount.discount
+document.getElementById("discount").value = response.discount.discount
+
+//document.getElementById("coupon-discount").style.color = "red"
+console.log()
+let total = document.getElementById("totalprice").innerHTML
+document.getElementById("totalprice").innerHTML = total-response.discount.discount
+document.getElementById("totalAmount").value = total-response.discount.discount
+
+document.getElementById("couponcode").value = response.coupon
+
+var coupon = document.getElementById("coupondiv")
+coupon.style.display = "none"
+} --}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+{{!-- paypalm --}}
+
+
+{{!-- sb-pjmsl23480472@personal.example.com
+
+d5q&Q[9O --}}

@@ -1,0 +1,236 @@
+<div class="container mb-4">
+    <br>
+    <br>
+    {{#if cartItems}}
+    <h2 style="text-align: center;">Your Shopping Cart</h2>
+    <p style="text-align: center;">Total items({{cartCount}})</p>
+    <br>
+    <br>
+    <div class="row">
+        <div class="col-12">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">No </th>
+                            <th scope="col"> Image</th>
+                            <th scope="col">Product</th>
+                            <th scope="col">Actual Price</th>
+                            <th scope="col" class="">Quantity</th>
+                            {{!-- <th scope="col" class="text-right">Offer Price</th> --}}
+                            {{!-- <th>total </th> --}}
+                            <th scope="col">Sub Total</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each cartItems }}
+                        <tr>
+                            <td>{{inc @index}}</td>
+                            <td><img style="height: 40px; width: 40px;" src="{{this.products.image.[0]}}"> </td>
+                            <td>{{this.products.name}}</td>
+                            <td>Rs:{{this.products.offerPrice}}</td>
+                            <td>
+                                <button class="btn mr-3"
+                                    onclick="changeQuantitys('{{this._id}}','{{../user}}','{{this.products._id}}','{{this.products.offerPrice}}',-1)">-</button>
+                                <span id="{{this.products._id}}">{{this.quantity}}</span>
+                                <button class="btn mr-3"
+                                    onclick="changeQuantitys('{{this._id}}','{{../user}}','{{this.products._id}}','{{this.products.offerPrice}}',1)">+</button>
+                            </td>
+                            <td id="sub{{this.products._id}}">{{#multy this.quantity
+                                this.products.offerPrice}}{{/multy}}</td>
+                            {{!-- <td class="text-right">${{this.OfferPrice}}</td> --}}
+                            {{!-- <td>$ {{this.total}}</td> --}}
+                            <td class="text-right">
+                                {{!-- <button onclick="removeCartItem('{{this.product._id}}')" class="btn btn-dark"
+                                    style="color: #ffffff;"><i class="fa-solid fa-trash"></i>&nbsp;
+                                    &nbsp;Remove</button> <i class="fa-solid fa-trash"></i>&nbsp; &nbsp; --}}
+                                {{!-- <a href="/users/removeCartItem/{{this.products._id}}" class="btn btn-dark"
+                                    style="color: #ffffff;">Remove</a> --}}
+                                {{!-- <div class="remove"><a
+                                        href="/delete-cart-product/{{this.products._id}}?_method=DELETE"
+                                        data-mdb-toggle="tooltip" title="Remove item">
+                                        <button><i class="fa-solid fa-trash"></i></button></a>
+                                </div> --}}
+                            <td class="column-5">
+                                <button onclick="deleteCart('{{this.products._id}}')" type="button"
+                                    class="btn btn-outline-danger">Remove</button>
+
+
+                            </td>
+                            </td>
+                        </tr>
+                        {{/each}}
+
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            {{!-- <td></td> --}}
+                            {{!-- <td></td> --}}
+                            <td><strong>Total</strong></td>
+                            <td class="text-right"><strong id="total">{{total}}</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col mb-2">
+            <div class="row">
+                <div class="col-sm-12  col-md-6">
+                    <a href='/users/home' class="btn btn-block btn-light">Continue Shopping</a>
+                </div>
+                <div class="col-sm-12 col-md-6 text-right">
+                    {{#if cartItems}}
+                    <a href="/users/place-order" class="btn btn-lg btn-block btn-success text-uppercase">Checkout</a>
+                    {{else}}
+
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+    </div>
+    {{else}}
+
+
+
+    <style>
+        @import url(http://fonts.googleapis.com/css?family=Calibri:400,300,700);
+
+        body {
+            background-color: #eee;
+            font-family: 'Calibri', sans-serif !important
+        }
+
+        .mt-100 {
+            margin-top: 100px
+        }
+
+        .card {
+            margin-bottom: 30px;
+            border: 0;
+            -webkit-transition: all .3s ease;
+            transition: all .3s ease;
+            letter-spacing: .5px;
+            border-radius: 8px;
+            -webkit-box-shadow: 1px 5px 24px 0 rgba(68, 102, 242, .05);
+            box-shadow: 1px 5px 24px 0 rgba(68, 102, 242, .05)
+        }
+
+        .card .card-header {
+            background-color: #fff;
+            border-bottom: none;
+            padding: 24px;
+            border-bottom: 1px solid #f6f7fb;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px
+        }
+
+        .card-header:first-child {
+            border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0
+        }
+
+        .card .card-body {
+            padding: 30px;
+            background-color: transparent
+        }
+
+        .btn-primary,
+        .btn-primary.disabled,
+        .btn-primary:disabled {
+            background-color: #4466f2 !important;
+            border-color: #4466f2 !important
+        }
+    </style>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <div class="container-fluid mt-100">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+
+                    </div>
+                    <div class="card-body cart">
+                        <div class="col-sm-12 empty-cart-cls text-center"> <img src="https://i.imgur.com/dCdflKN.png"
+                                width="130" height="130" class="img-fluid mb-4 mr-3">
+                            <h3><strong>Your Cart is Empty</strong></h3>
+                            <h4>Add something to make me happy :)</h4> <a href='/users/home'
+                                class="btn btn-primary cart-btn-transform m-3" data-abc="true">continue shopping</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{/if}}
+</div>
+
+
+
+<script>
+    function changeQuantitys(cartId, user, prodId, price, count) {
+        let quantity = parseInt(document.getElementById(prodId).innerHTML)
+        count = parseInt(count)
+                console.log('hhhhiiiiiiiiii');
+
+        $.ajax({
+            url: '/users/change-product-quantity',
+            data: {
+                cart: cartId,
+                user: user,
+                product: prodId,
+                count: count,
+                quantity: quantity
+            },
+            method: 'post',
+            success: (response) => {
+                if (response.removeProduct) {
+                    alert("Product Removed From the Cart")
+                    location.reload()
+                }else if(response.status == false) {
+                    alert("Quantity Exceeds Stock Limit")
+                    location.reload()
+                } else {
+                    let subtotal = (quantity + count) * price
+                    document.getElementById("sub" + prodId).innerHTML = subtotal
+                    document.getElementById(prodId).innerHTML = quantity + count
+                    document.getElementById('total').innerHTML = response.total
+                }
+            }
+        })
+    }
+  
+
+    function deleteCart(prodId) {
+        swal({
+            title: "Are you sure?",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "red",
+            confirmButtonText: "Yes",
+            cancelButtonText: "No",
+            closeOnConfirm: false,
+            closeOnCancel: true
+        },
+            function (isConfirm) {
+                console.log('dddddddddddd988888888888888888888888888888888888')
+                if (isConfirm) {
+                    $.ajax({
+                        url: '/users/delete-cart-product/' + prodId,
+                        type: 'get',
+                        success: (response) => {
+                            if (response.status) {
+                                location.reload()
+                            }
+                        }
+                    })
+                }
+            }
+        );
+    }
+</script>

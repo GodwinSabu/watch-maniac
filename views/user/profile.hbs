@@ -1,0 +1,124 @@
+<div class="container-xl px-4" style="margin-top:70px; width:65%;">
+    
+
+        {{!-- <ul class="ul" style="margin-left:200px ;">
+            <li class="li"> <a class="nav-link active ms-0" href="/users/profile"
+                    style="font-size: large; font-weight: 600;">Profile</a>
+            </li>
+            <li class="li"><a class="nav-link" href="/users/address"
+                    style="font-size: large; font-weight: 600;">Address</a></li>
+            <li class="li"> <a class="nav-link" href="/users/password"
+                    style="font-size: large; font-weight: 600;">Password</a>
+            </li>
+            <li class="li">
+                <a class="nav-link" href="/users/wallet" style="font-size: large; font-weight: 600;">Wallet</a>
+
+            </li>
+
+
+        </ul> --}}
+        <nav class=" nav nav-borders">
+            <a class="nav-link active ms-0" href="/users/profile"
+                style="font-size: large; font-weight: 600;">Profile</a>
+            <a class="nav-link" href="/users/address" style="font-size: large; font-weight: 600;"><strong> Address</strong> </a>
+            <a class="nav-link" href="/users/password" style="font-size: large; font-weight: 600;">Password</a>
+            <a class="nav-link" href="/users/wallet" style="font-size: large; font-weight: 600;">Wallet</a>
+        </nav>
+
+
+
+
+
+
+
+   
+    <hr class="mt-0 mb-4">
+    <div class="card mb-4">
+        <div class="card-header" style="background-color: #e1e1e1;color:rgb(0, 0, 0);"><strong>Account Details</strong>  </div>
+        <div class="card-body">
+            <form action="/users/profile" method="post">
+                <!-- Form Group (username)-->
+                <!-- Form Row-->
+                <div class="row gx-3 mb-3">
+                    <!-- Form Group (first name)-->
+                    <div class="col-md-6">
+                        <label class="small mb-1" for="firstname">First name</label>
+                        <input class="form-control" id="firstname" name="firstname" type="text"
+                            placeholder="Enter your first name" value="{{user.firstname}}">
+                    </div>
+                    <!-- Form Group (last name)-->
+                    <div class="col-md-6">
+                        <label class="small mb-1" for="lastname">Last name</label>
+                        <input class="form-control" id="lastname" name="lastname" type="text"
+                            placeholder="Enter your last name" value="{{user.lastname}}">
+                    </div>
+                </div>
+                <!-- Form Row        -->
+
+                <!-- Form Group (email address)-->
+                <div class="mb-3">
+                    <label class="small mb-1" for="email">Email address</label>
+                    <input class="form-control" id="email" name="email" type="email"
+                        placeholder="Enter your email address" value="{{user.email}}">
+                </div>
+                <!-- Form Row-->
+                <div class="row gx-3 mb-3">
+                    <!-- Form Group (phone number)-->
+                    <div class="col-md-6">
+                        <label class="small mb-1" for="mobile">Phone number</label>
+                        <input class="form-control" id="mobile" name="mobile" type="tel"
+                            placeholder="Enter your phone number" value="{{user.mobile}}">
+                    </div>
+                    <div class="col-md-6">
+                        <input class="form-control" id="id" name="_id" type="tel" value="{{user._id}}" hidden>
+                    </div>
+                </div>
+                <!-- Save changes button-->
+                <button class="btn btn-primary" type="submit">Save changes</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200&display=swap');
+
+    :root {
+        --font-style: 'Nunito Sans', sans-serif;
+    }
+
+    body {
+        font-family: var(--font-style);
+        background-color: #fcfdff;
+    }
+
+    .ul {
+        margin: 5%;
+        width: 450px;
+        display: flex;
+        flex-direction: row;
+        list-style: none;
+        padding: 25px 0;
+        border-radius: 25px;
+        border: 0.1px solid #009dff;
+        background-color: #18181B;
+        box-shadow: 0 4px 8px 0 #00fafa, 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+
+    }
+
+    .li {
+        margin: auto;
+        color: white;
+        font-size: 20px;
+        cursor: pointer;
+    }
+
+    .li:after {
+        display: block;
+    }
+
+    .li:hover:after {
+        transform: scaleX(1);
+    }
+</style>

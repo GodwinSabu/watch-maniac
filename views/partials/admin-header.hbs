@@ -1,0 +1,332 @@
+{{!-- <nav class="navbar bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            Admin
+        </a>
+        <a href="/admin/logout" class="btn btn-dark" style="align-items: flex-end;">logout</a>
+
+    </div>
+</nav>
+<div
+    style=" background-image: url(https://img.freepik.com/free-vector/blue-pink-halftone-background_53876-99004.jpg?w=2000); width: 15rem; height: 41.5rem; display: flex; flex-direction: row; justify-content: left; float: left;">
+    <div class="container "
+        style=" text-decoration: none; padding-top: 3rem; padding-left: 2rem; text-decoration-color: #ffff;">
+        <a href="/admin/dashboard" style="text-decoration: none;  color: #000">
+            <h5>Dash board</h5>
+        </a>
+        <br>
+        <a href="/admin/product" style="text-decoration: none; color: #000;">
+            <h5>Product</h5>
+        </a>
+        <br>
+        <a href="/admin/category" style="text-decoration: none; color: #000;">
+            <h5>Category</h5>
+        </a>
+        <br>
+        <a href="/admin/users" style="text-decoration: none; color: #000;">
+            <h5>Users</h5>
+        </a>
+        <br>
+        <a href="/admin/order" style="text-decoration: none; color: #000;">
+            <h5>Orders</h5>
+        </a>
+        <br>
+        <a href="/admin/banner" style="text-decoration: none; color: #000;">
+            <h5>banner</h5>
+        </a>
+    </div>
+</div> --}}
+
+
+<div id="wrapper">
+
+    <!-- ========== Left Sidebar Start ========== -->
+    <div class="left side-menu" style="height:100vh !important;position: fixed!important;top:0;">
+        <button type="button" class="button-menu-mobile button-menu-mobile-topbar open-left waves-effect">
+            <i class="ion-close"></i>
+        </button>
+
+        <!-- LOGO -->
+        <div class="topbar-left">
+            <div class="text-center">
+                <a href="#" class="logo"><img style="width:90px;" src="/images/logo.png" alt="">admin</a>
+                <!-- <a href="index.html" class="logo"><img src="/images/logo.png" height="24" alt="logo"></a> -->
+            </div>
+        </div>
+
+        <div class="sidebar-inner slimscrollleft" style="height:80vh !important">
+
+            <div id="sidebar-menu" style="80vh !important">
+                <ul>
+                    {{!-- <li class="menu-title">Main</li> --}}
+
+                    <li>
+                        <a href="/admin/dashboard" class="waves-effect">
+                            <i class="mdi mdi-airplay"></i>
+                            <span> Dashboard <span class="badge badge-pill badge-primary float-right"></span></span>
+                        </a>
+                    </li>
+
+                    <li class="has_sub">
+                        <a  href="/admin/users" class="waves-effect"><i class="mdi mdi-account"></i> <span>
+                                User</span> <span class="float-right"><i class="mdi mdi-chevron-right"></i></span></a>
+                        {{!-- <a href="/admin/users" style="text-decoration: none; color: #000;">
+                            <h5>Users</h5>
+                        </a> --}}
+                        <ul class="list-unstyled">
+                            <li><a href="/admin/users">All Users</a></li>
+                            {{!-- <li><a href="/admin/addUser">Add a User</a></li> --}}
+                            <a href="/admin/users" style="text-decoration: none; color: #000;">
+                                <h5>Users</h5>
+                            </a>
+                        </ul>
+                    </li>
+
+                    <li class="has_sub">
+                        <a href="/admin/product"  class="waves-effect"><i class="mdi mdi-basket"></i> <span>
+                                Products</span> <span class="float-right"><i
+                                    class="mdi mdi-chevron-right"></i></span></a>
+                        <ul class="list-unstyled">
+                            <li><a href="/admin/allProduct">All Products</a></li>
+                            <li><a href="/admin/addProduct">Add a Product</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="has_sub">
+                        <a href="/admin/category" class="waves-effect"><i class="mdi mdi-arrange-send-backward"></i>
+                            <span>
+                                Category</span> <span class="float-right"><i
+                                    class="mdi mdi-chevron-right"></i></span></a>
+                        <ul class="list-unstyled">
+                            <li><a href="/admin/category">All Category</a></li>
+                            <li><a href="/admin/category">Add a Category</a></li>
+                            <li><a href="/admin/category">Sub Category</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="/admin/orders" class="waves-effect">
+                            <i class="mdi mdi-airplay"></i>
+                            <span>Orders</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/admin/banner-management" class="waves-effect">
+                            <i class="mdi mdi-airplay"></i>
+                            <span>Banners</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/admin/offer-management" class="waves-effect">
+                            <i class="mdi mdi-airplay"></i>
+                            <span>Offers-Management</span>
+                        </a>
+                    </li>
+                     <li>
+                        <a href="/admin/coupon" class="waves-effect">
+                            <i class="mdi mdi-airplay"></i>
+                            <span>Coupon</span>
+                        </a>
+                    </li>
+                     <li>
+                        <a href="/admin/sales-report" class="waves-effect">
+                            <i class="mdi mdi-airplay"></i>
+                            <span>Sales-Report</span>
+                        </a>
+                    </li>
+                     <li>
+                        <a href="/admin/logout" class="waves-effect">
+                            <i class="mdi mdi-airplay"></i>
+                            <span>Logout</span>
+                        </a>
+                    </li>
+
+                    {{!-- <li class="has_sub">
+                        <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-ticket-confirmation"></i>
+                            <span>
+                                Offers</span> <span class="float-right"><i class="mdi mdi-chevron-right"></i></span></a>
+                        <ul class="list-unstyled">
+                            <li><a href="/admin/add_offer">Add a Offer</a></li>
+                            <li><a href="/admin/add_category_offer">Add category Offer</a></li>
+                        </ul>
+
+                    </li> --}}
+                    {{!-- <li class="has_sub">
+                        <a href="javascript:void(0);" class="waves-effect"><i
+                                class="fa-solid fa-arrows-to-dot"></i><span>
+                                Coupon</span> <span class="float-right"><i class="mdi mdi-chevron-right"></i></span></a>
+                        <ul class="list-unstyled">
+                            <li><a href="/admin/coupon">Create Coupon</a></li>
+                            <li><a href="/admin/coupon_used">Coupons</a></li> --}}
+                            {{!-- <li><a href="/admin/add_category_offer">Add category Offer</a></li> --}}
+                        </ul>
+
+                    </li>
+                </ul>
+            </div>
+            <div class="clearfix"></div>
+        </div> <!-- end sidebarinner -->
+    </div>
+    <!-- Left Sidebar End -->
+
+    <!-- Start right Content here -->
+
+    <div class="content-page">
+        <!-- Start content -->
+        <div class="content">
+
+            <!-- Top Bar Start -->
+            <div class="topbar">
+
+                <nav class="navbar-custom">
+
+                    <ul class="list-inline float-right mb-0">
+                        <!-- language-->
+                        {{!-- <li class="list-inline-item dropdown notification-list hide-phone">
+                            <a class="nav-link dropdown-toggle arrow-none waves-effect text-white"
+                                data-toggle="dropdown" href="#" role="button" aria-haspopup="false"
+                                aria-expanded="false">
+                                English <img src="/images/flags/us_flag.jpg" class="ml-2" height="16" alt="" />
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right language-switch">
+                                <a class="dropdown-item" href="#"><img src="/images/flags/italy_flag.jpg" alt=""
+                                        height="16" /><span> Italian </span></a>
+                                <a class="dropdown-item" href="#"><img src="/images/flags/french_flag.jpg" alt=""
+                                        height="16" /><span> French </span></a>
+                                <a class="dropdown-item" href="#"><img src="/images/flags/spain_flag.jpg" alt=""
+                                        height="16" /><span> Spanish </span></a>
+                                <a class="dropdown-item" href="#"><img src="/images/flags/russia_flag.jpg" alt=""
+                                        height="16" /><span> Russian </span></a>
+                            </div>
+                        </li> --}}
+                        {{!-- <li class="list-inline-item dropdown notification-list">
+                            <a class="nav-link dropdown-toggle arrow-none waves-effect" data-toggle="dropdown" href="#"
+                                role="button" aria-haspopup="false" aria-expanded="false">
+                                <i class="ti-email noti-icon"></i>
+                                <span class="badge badge-danger noti-icon-badge">5</span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right dropdown-arrow dropdown-menu-lg">
+                                <!-- item-->
+                                <div class="dropdown-item noti-title">
+                                    <h5><span class="badge badge-danger float-right">745</span>Messages</h5>
+                                </div>
+
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                    <div class="notify-icon"><img src="images/users/avatar-2.jpg" alt="user-img"
+                                            class="img-fluid rounded-circle" /> </div>
+                                    <p class="notify-details"><b>Charles M. Jones</b><small class="text-muted">Dummy
+                                            text of the printing and typesetting industry.</small></p>
+                                </a>
+
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                    <div class="notify-icon"><img src="/images/users/avatar-3.jpg" alt="user-img"
+                                            class="img-fluid rounded-circle" /> </div>
+                                    <p class="notify-details"><b>Thomas J. Mimms</b><small class="text-muted">You have
+                                            87 unread messages</small></p>
+                                </a>
+
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                    <div class="notify-icon"><img src="/images/users/avatar-4.jpg" alt="user-img"
+                                            class="img-fluid rounded-circle" /> </div>
+                                    <p class="notify-details"><b>Luis M. Konrad</b><small class="text-muted">It is a
+                                            long established fact that a reader will</small></p>
+                                </a>
+
+                                <!-- All-->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                    View All
+                                </a>
+
+                            </div>
+                        </li> --}}
+
+                        {{!-- <li class="list-inline-item dropdown notification-list">
+                            <a class="nav-link dropdown-toggle arrow-none waves-effect" data-toggle="dropdown" href="#"
+                                role="button" aria-haspopup="false" aria-expanded="false">
+                                <i class="ti-bell noti-icon"></i>
+                                <span class="badge badge-success noti-icon-badge">23</span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right dropdown-arrow dropdown-menu-lg">
+                                <!-- item-->
+                                <div class="dropdown-item noti-title">
+                                    <h5><span class="badge badge-danger float-right">87</span>Notification</h5>
+                                </div>
+
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                    <div class="notify-icon bg-primary"><i class="mdi mdi-cart-outline"></i></div>
+                                    <p class="notify-details"><b>Your order is placed</b><small class="text-muted">Dummy
+                                            text of the printing and typesetting industry.</small></p>
+                                </a>
+
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                    <div class="notify-icon bg-success"><i class="mdi mdi-message"></i></div>
+                                    <p class="notify-details"><b>New Message received</b><small class="text-muted">You
+                                            have 87 unread messages</small></p>
+                                </a>
+
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                    <div class="notify-icon bg-warning"><i class="mdi mdi-martini"></i></div>
+                                    <p class="notify-details"><b>Your item is shipped</b><small class="text-muted">It is
+                                            a long established fact that a reader will</small></p>
+                                </a>
+
+                                <!-- All-->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                    View All
+                                </a>
+
+                            </div>
+                        </li> --}}
+
+                        <li class="list-inline-item dropdown notification-list">
+                            <a class="nav-link dropdown-toggle arrow-none waves-effect nav-user" data-toggle="dropdown"
+                                href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                                <img src="/images/users/avatar-1.jpg" alt="user" class="rounded-circle">
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
+                                <!-- item-->
+                                <div class="dropdown-item noti-title">
+                                    <h5>Welcome</h5>
+                                </div>
+                                {{!-- <a class="dropdown-item" href="#"><i
+                                        class="mdi mdi-account-circle m-r-5 text-muted"></i> Profile</a> --}}
+                                {{!-- <a class="dropdown-item" href="#"><i class="mdi mdi-wallet m-r-5 text-muted"></i>
+                                    My Wallet</a>
+                                <a class="dropdown-item" href="#"><span
+                                        class="badge badge-success float-right">5</span><i
+                                        class="mdi mdi-settings m-r-5 text-muted"></i> Settings</a>
+                                <a class="dropdown-item" href="#"><i
+                                        class="mdi mdi-lock-open-outline m-r-5 text-muted"></i> Lock screen</a> --}}
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="/admin/logout"><i
+                                        class="mdi mdi-logout m-r-5 text-muted"></i> Logout</a>
+                            </div>
+                        </li>
+
+                    </ul>
+
+                    <ul class="list-inline menu-left mb-0">
+                        <li class="float-left">
+                            <button class="button-menu-mobile open-left waves-light waves-effect">
+                                <i class="mdi mdi-menu"></i>
+                            </button>
+                        </li>
+                        {{!-- <li class="hide-phone app-search">
+                            <form role="search" class="">
+                                <input type="text" placeholder="Search..." class="form-control">
+                                <a href=""><i class="fa fa-search"></i></a>
+                            </form>
+                        </li> --}}
+                    </ul>
+
+                    <div class="clearfix"></div>
+
+                </nav>
+
+            </div>

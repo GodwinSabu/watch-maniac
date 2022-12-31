@@ -1,0 +1,288 @@
+<div class="container-fluid" id="container_content">
+
+    <div class="container">
+        <!-- Title -->
+        <div class="d-flex justify-content-between align-items-center py-3">
+            <h2 class="h5 mb-0"><a href="#" class="text-muted"></a>
+                Order ID : {{orderdata._id}} </h2> {{#ifCheck orderdata.status "Delivered"}}
+            <a class="btn btn-primary" href="/users/order/invoice/{{orderdata._id}}">View Invoice</a>
+            {{/ifCheck}}
+
+
+
+
+
+        </div>
+
+
+        <!-- Main content -->
+        <div class="row" style="margin-left: 10rem;">
+            <div class="col-lg-8">
+                <!-- Details -->
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="mb-3 d-flex justify-content-between">
+                            <div>
+                                <br>
+                                <span class="me-3">{{orderdata.date}}</span>
+                                <span class="badge rounded-pill bg-info">{{orderdata.status}}</span>
+                            </div>
+
+                            <div class="d-flex">
+
+
+
+                                {{!-- <button type="button" class="btn btn-sm rounded-pill btn_print me-3" id="rep"
+                                    value="Download as Pdf">Download Invoice</button> --}}
+                            </div>
+                        </div>
+                        <table class="table table-borderless">
+                            <tbody>
+                                {{#each orderdata.products}}
+
+                                <tr>
+                                    <td>
+                                        <div class="d-flex mb-2">
+                                            <div class="flex-shrink-0">
+                                                <img src="{{this.image.[0]}}" alt="" width="35" class="img-fluid" />
+                                            </div>
+                                            <div class="flex-lg-grow-1 ms-3">
+                                                <h6 class="small mb-0">{{this.name}}</h6>
+                                                <span class="small"></span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>₹{{this.offerPrice}}</td>
+                                    <td>{{this.quantity}}</td>
+                                    <td class="text-end">₹
+                                        {{#multy this.offerPrice this.quantity }}{{/multy}}
+                                    </td>
+
+
+
+
+                                    <td>
+
+                                        
+                                        {{#unless ../orderdata.couponApply}}
+                          
+
+                                        {{#unless this.Cancel}}
+
+                                        {{#ifCheck ../orderdata.status "Cancel Order"}}
+
+                                        {{/ifCheck}}
+
+                                        {{#ifCheck ../orderdata.status "pending"}}
+                                        <button class="btn btn-danger"
+                                            onclick="cancelOrderSingle('{{../orderdata._id}}','{{this.productId}}')">Cancel
+                                            Order</button>
+                                        {{/ifCheck}}
+
+                                        {{#ifCheck ../orderdata.status "placed"}}
+                                        <button class="btn btn-danger"
+                                            onclick="cancelOrderSingle('{{../orderdata._id}}','{{this.productId}}')">Cancel
+                                            Order</button>
+                                        {{/ifCheck}}
+
+                                        {{#ifCheck ../orderdata.status "shipped"}}
+                                        <button class="btn btn-danger"
+                                            onclick="cancelOrderSingle('{{../orderdata._id}}','{{this.productId}}')">Cancel
+                                            Order</button>
+                                        {{/ifCheck}}
+
+                                        {{/unless}}
+
+
+
+                                        {{#unless this.Return}}
+
+                                        {{#ifCheck ../orderdata.status "delivered"}}
+                                        <button class="btn btn-danger"
+                                            onclick="returnOrderSingle('{{../orderdata._id}}','{{this.productId}}')">Return
+                                            Order</button>
+                                        {{/ifCheck}}
+
+                                        {{/unless}}
+
+                                        {{/unless}}
+
+
+                                    </td>
+
+
+
+
+
+                                </tr>
+                                {{/each}}
+                            </tbody>
+                            <tfoot>
+                              
+                                <tr>
+                                    <td colspan="2">Subtotal</td>
+                                    <td class="text-end">₹{{orderdata.totalAmount}}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">Shipping</td>
+                                    <td class="text-end" style="color: rgb(16, 135, 16);">FREE</td>
+                                </tr>
+                                {{!-- <tr>
+                                    <td colspan="2">Discount (Code: NEWYEAR)</td>
+                                    <td class="text-danger text-end">-$10.00</td>
+                                </tr> --}}
+                                <tr class="fw-bold">
+                                    <td colspan="2">TOTAL</td>
+                                    <td class="text-end">₹{{orderdata.totalAmount}}</td>
+                                </tr>
+                               
+                            </tfoot>
+                        </table>
+                         <a href="/users/order/invoice/{{orderdata._id}}" class="btn btn-primary">INVOICE</a>
+                    </div>
+                </div>
+                <!-- Payment -->
+                <div class="card mb-4">
+                    <br>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <h3 class="h6">Payment Method</h3>
+                                <p>{{orderdata.paymentMethod}}
+                                    <br />
+                                    Total: ₹{{orderdata.totalAmount}}
+
+                            </div>
+                            <div class="col-lg-6">
+                                <h3 class="h6">Billing address</h3>
+                                <address>
+                                    <span>
+                                        {{orderdata.deliveryDetails.fullname}}
+                                        <br>
+                                        {{orderdata.deliveryDetails.address}}
+                                        <br>
+                                        {{orderdata.deliveryDetails.mobile}}
+                                    </span>
+                                </address>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <!-- Customer Notes -->
+                <div class="card mb-4">
+                    {{!-- <div class="card-body">
+                        <h3 class="h6">Customer Notes</h3>
+                        <p>Sed enim, faucibus litora velit vestibulum habitasse. Cras
+                            lobortis cum sem aliquet mauris rutrum. Sollicitudin. Morbi, sem
+                            tellus vestibulum porttitor.</p>
+                    </div> --}}
+                </div>
+                {{!-- <div class="card mb-4"> --}}
+                    <!-- Shipping information -->
+                    {{!-- <div class="card-body">
+                        <h3 class="h6">Shipping Address</h3>
+                        <address>
+                            <p>{{oderdata.deliveryDetails.address}}</p>
+                        </address>
+                    </div> --}}
+                    {{!--
+                </div> --}}
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    body {
+        background: #eee;
+    }
+
+    .card {
+        box-shadow: 0 20px 27px 0 rgb(0 0 0 / 5%);
+    }
+
+    .card {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        min-width:
+            0;
+        word-wrap: break-word;
+        background-color: #fff;
+        background-clip: border-box;
+        border: 0 solid rgba(0, 0, 0, .125);
+        border-radius: 1rem;
+    }
+
+    .text-reset {
+        --bs-text-opacity: 1;
+        color: inherit !important;
+    }
+
+    a {
+        color: #5465ff;
+        text-decoration: none;
+    }
+</style>
+
+<script>
+
+    function cancelOrderSingle(orderid, proid) {
+        console.log("cancel order")
+        swal(
+            {
+                title: "Are you sure?",
+                text: "Do you want to cancel the order",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes, Cancel my order",
+                cancelButtonText: "No !",
+                closeOnConfirm: true,
+                closeOnCancel: true,
+            },
+            function (isConfirm) {
+                if (isConfirm) {
+                    $.ajax({
+                        url: '/users/order/cancelproduct',
+                        type: "post",
+                        data: {
+                            orderid: orderid,
+                            productid: proid
+                        },
+                        success: (response) => {
+                            if (response.status) {
+                                location.reload()
+                            }
+
+                        },
+                    });
+                }
+            }
+        )
+    }
+
+
+    function returnOrderSingle(orderid, proid) {
+        console.log("return order")
+        swal("Product Return!", "You Product Return Accepted !", "warning");
+
+        $.ajax({
+            url: '/users/order/returnproduct',
+            data: {
+                orderid: orderid,
+                productid: proid
+            },
+            type: "post",
+            success: (response) => {
+
+            }
+        })
+    }
+
+
+
+
+</script>

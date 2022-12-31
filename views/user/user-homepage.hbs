@@ -1,0 +1,531 @@
+<section class="mt-5">
+  {{#each banner}}
+  <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" style="box-shadow: 0px -4px 18px 11px
+    black;">
+
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="{{this.image.[0]}}" class="d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img src="{{this.image.[1]}}" class="d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img src="{{this.image.[2]}}" class="d-block w-100" alt="...">
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+  {{/each}}
+</section>
+<style>
+  .mask-custom {
+    background: rgba(24, 24, 16, .2);
+    border-radius: 2em;
+    backdrop-filter: blur(15px);
+    border: 2px solid rgba(255, 255, 255, 0.05);
+    background-clip: padding-box;
+    box-shadow: 10px 10px 10px rgba(46, 54, 68, 0.03);
+  }
+
+  @media (max-width: 767px) {
+    .bg-image {
+      height: 1400px !important;
+    }
+  }
+</style>
+
+{{!-- ////////////////// --}}
+{{!-- <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+  </ol>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img class="d-block w-100"
+        src="https://www.bobswatches.com/rolex-blog/wp-content/uploads/2022/07/Rolex-Oyster-Perpetual.png"
+        alt="First slide">
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="https://italianwatchspotter.com/wp-content/uploads/2022/01/copertina-min-2.png"
+        alt="Second slide">
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100"
+        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQspBzJsi7cqMH_YpkkGJIGevZGpCi4fqWFdw&usqp=CAU"
+        alt="Third slide">
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div> --}}
+{{!-- Categories --}}
+
+<section class="container py-5">
+  <div class="row text-center pt-3">
+    <div class="col-lg-6 m-auto">
+      <h1 class="h1">Categories of The Month</h1>
+      <p>
+        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+        deserunt mollit anim id est laborum.
+      </p>
+    </div>
+  </div>
+  <div class="row">
+    {{#each category}}
+    <div class="col-12 col-md-4 p-5 mt-3">
+      {{!-- <a href="#"><img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-Mk61joBSYUU8ka9SXGOIwjNS-FT7Xa5jcw&usqp=CAUg"
+          class="rounded-circle img-fluid border"> </a> --}}
+      {{!-- <h5 class="text-center mt-3 mb-3">{{this.category}}</h5> --}}
+      <p class="text-center"><a href="/users/catpro/{{this.category}}" class="btn btn-success">{{this.category}}</a></p>
+    </div>
+    {{!-- <div class="col-12 col-md-4 p-5 mt-3">
+      <a href="#"><img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-Mk61joBSYUU8ka9SXGOIwjNS-FT7Xa5jcw&usqp=CAUg"
+          class="rounded-circle img-fluid border"></a>
+      <h2 class="h5 text-center mt-3 mb-3">Shoes</h2>
+      <p class="text-center"><a class="btn btn-success">Go Shop</a></p>
+    </div>
+    <div class="col-12 col-md-4 p-5 mt-3">
+      <a href="#"><img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQH6x1eMEsyIM9QWQbYIribt3FwN59QvpXGZw&usqp=CAU"
+          class="rounded-circle img-fluid border"></a>
+      <h2 class="h5 text-center mt-3 mb-3">Accessories</h2>
+      <p class="text-center"><a class="btn btn-success">Go Shop</a></p>
+    </div> --}}
+    {{/each}}
+  </div>
+</section>
+{{!-- <section>
+  <div class="container mt-5 p-5">
+    <div class="row"> --}}
+      {{!-- {{#each products}}
+      <div class="card" style="width: 16rem;">
+        <img style="width: 14rem ; height: auto;" src="/product-images/{{this._id}}.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{this.name}}</h5>
+          <p class="card-text">{{this.category}}</p>
+          <h4 class="card-title">{{this.price}}</h4>
+          <h4 class="card-title">{{this.offerprice}}</h4>
+          <a href="/users/product-details/{{this._id}}">view-product-details</a>
+          <button class="btn btn-dark" onclick="addtocart('{{this._id}}')">Add to Cart</button>
+        </div>
+      </div>
+
+      {{/each}} --}}
+      {{!-- <section> --}}
+
+        {{!-- <div class="margin-left:100px">
+          <img src="https://worldtimer.com.hk/image/catalog/editoruploads/banner-rolex-set19-en.jpg" alt="">
+        </div> --}}
+
+
+        {{!-- <div class="col-lg-6 m-auto;" style="margin-left:300px">
+          <h1 class="h1">Categories of The Month</h1>
+          <p>
+            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+            deserunt mollit anim id est laborum.
+          </p>
+        </div> --}}
+        {{!-- ------ --}}
+        <section>
+
+          <main>
+
+            <link rel="preconnect" href="https://fonts.googleapis.com">
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+            <link
+              href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&family=Poppins:ital,wght@0,200;1,300&display=swap"
+              rel="stylesheet">
+
+            <style>
+              a {
+                text-decoration: none;
+              }
+
+              h4 {
+                display: inline
+              }
+
+              h5 {
+                display: inline
+              }
+            </style>
+
+            <br>
+            <br>
+            <br>
+            {{!-- <h1 class="main-header">Watch Maniac <h1> --}}
+                {{!-- <p>The latest and greatest.</p> --}}
+                {{!-- <a href="#" class="links">Learn more ></a> <a href="#" class="links">Buy ></a> --}}
+                <br>
+                {{!-- <img
+                  src="https://www.audemarspiguet.com/content/dam/ap/com/products/watches/MTR009838.00/importer/standup.png.transform.approductmain.png"
+                  width="500"></img> --}}
+
+
+                <h2 class="main-header"> Audemars Black</h2>
+                <p> Built for the Legends.</p>
+                <a href="#" class="links">Learn more ></a> <a href="#" class="links">Buy ></a>
+                <br>
+                <img src="https://wristreview.com/wp-content/uploads/2022/01/hero_jumbo_steel-scaled.jpg"
+                  width="600"></img>
+
+                <div class="container">
+                  <div class="grid">
+
+                    {{!-- <section id="airpods" class="cell"> --}}
+                      {{!-- <h3 class="header">AirPods</h3> --}}
+                      {{!-- <p class="caption"> With all new Spatial Audio.</p> --}}
+                      {{!-- <a href="#" class="links">Learn more ></a> <a href="#" class="links">Buy ></a> --}}
+                      {{!-- <br> --}}
+                      {{!-- <img
+                        src="https://s.yimg.com/os/creatr-uploaded-images/2021-10/a063b920-3036-11ec-b7d7-7c35df5aba66"
+                        width="250"></img> --}}
+                    </section>
+
+                    <section id="apple-watch" class="cell">
+                      {{!-- <br> --}}
+                      {{!-- <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg"
+                        width="30"></img> --}}
+                      {{!-- <h4 class="header">Watch</h4> --}}
+                      {{!-- <p class="caption">The largest display yet.</p> --}}
+                      {{!-- <a href="#" class="links">Learn more ></a> <a href="#" class="links">Buy ></a> --}}
+                      {{!-- <br> --}}
+                      {{!-- <img src="https://watch-our.com/wp-content/uploads/2021/05/chronograph-1-1920x1080.jpg"
+                        width="250"></img> --}}
+                    </section>
+
+                    <section id="card" class="cell">
+                      {{!-- <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg"
+                        width="30"></img> --}}
+                      {{!-- <h5 class="header">Card</h5> --}}
+                      {{!-- <p class="caption">3% cash back with every purchase.</p> --}}
+                      {{!-- <a href="#" class="links">Learn more ></a> <a href="#" class="links">Apply ></a> --}}
+                      {{!-- <br> --}}
+                      {{!-- <br> --}}
+                      {{!-- <img src="https://techcrunch.com/wp-content/uploads/2019/07/card__fhxgfbpnt7e6_large_2x.jpg"
+                        width="250"></img> --}}
+                      {{!-- </section> --}}
+
+                    {{!-- <section id="apple-tv" class="cell"> --}}
+                      {{!-- <a href="#" class="links" id="stream-now">Stream now</p> --}}
+                        {{!-- </section> --}}
+                  </div>
+                </div>
+
+          </main>
+          <style>
+            main {
+              text-align: center;
+              font-family: 'Open Sans', sans-serif;
+              width: 50%;
+              margin: auto;
+            }
+
+            .header {
+              font-size: 30px;
+
+            }
+
+            .caption {
+              font-size: 18px;
+            }
+
+            .links {
+              font-size: 18px;
+            }
+
+            h1 {
+              padding: 0px 0px 0px 0px;
+            }
+
+            #airpods {}
+
+            #apple-watch {}
+
+            #card {}
+
+            #apple-tv {
+              background-image: url("") -webkit-background-size: cover;
+              -moz-background-size: cover;
+              -o-background-size: cover;
+              background-size: cover;
+              border-color: black;
+            }
+
+            #stream-now {
+              padding: 25em 0em 0em 0em;
+
+            }
+
+            #navbar {
+              position: fixed;
+              left: 0px;
+              top: 0px;
+              width: 100%;
+              height: 50px;
+              border: 1px solid;
+              background-color: rgba(12, 11, 12, 0.9);
+              display: flex;
+              justify-content: space-between;
+            }
+
+            .nav-link {
+              color: white;
+              padding-top: 10px;
+              width: 75%;
+            }
+
+            .grid {
+              display: grid;
+              grid-template-columns: 1fr 1fr;
+              grid-template-rows: 1fr 1fr;
+              padding: 50px;
+            }
+          </style>
+        </section>
+
+        <div class="col-lg-6 m-auto" style="text-align:center;">
+          <h1 class="h1">Featured Products</h1>
+          <p>
+            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+            deserunt mollit anim id est laborum.
+          </p>
+        </div>
+
+        <section>
+          <div class="position-fixed w-25 d-none" id="success"
+            style="left:530px; top: 100px; z-index: 1000; background-color:black; border-radius:10px;">
+            <p id="success-text" class="text-center mt-3" style="color:white;">Added to
+              Cart</p>
+          </div>
+          <div class="position-fixed w-25 d-none" id="wishSuccess"
+            style="left:530px; top: 100px; z-index: 1000; background-color:black; border-radius:10px;">
+            <p id="success-text" class="text-center mt-3" style="color:white;">Added to
+              Wishlist</p>
+          </div>
+          <div class="container mt-3">
+            <div class="row">
+              {{#each products}}
+              <div class="col-lg-3 col-md-6 col-sm-12 ">
+                <div class="card" style="width: 14rem; margin-top:25px;">
+                  <div class="position-relative bg-light overflow-hidden">
+                    <img style="width:180px; height:180px;" src="{{this.image.[0]}}" class="card-img-top mx-auto mt-3"
+                      alt="..." />
+                    {{#if this.currentOffer}}
+                    <div class="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-2">
+                      {{this.currentOffer}}% off</div>
+                    {{else}}
+                    <div class="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-2">
+                      0% off</div>
+                    {{/if}}
+                  </div>
+                  {{!-- <img style="width:180px; height:180px;" src="{{this.image.[0]}}"
+                    class="card-img-top mx-auto mt-3" alt="..." /> --}}
+
+                  <div class="card-body">
+                    <a href="/users/product-details/{{this._id}}"
+                      style="text-decoration: none; color: black;">{{this.name}}</a>
+                    <a style="text-decoration: none;" href="/product-details/{{this._id}}">
+                      <h5>{{this.product}}</h5>
+                    </a>
+                    <p class="mb-0" style="text-decoration :line-through;">₹{{this.price}}</p>
+                    {{#if this.offerPrice}}
+                    <h5>₹{{this.offerPrice}}</h5>
+                    {{else}}
+                    <h5>₹{{this.price}}</h5>
+                    {{/if}}
+
+                    <span class="hint-star star">
+                      <i class="fa fa-star" aria-hidden="true"></i>
+                      <i class="fa fa-star" aria-hidden="true"></i>
+                      <i class="fa fa-star" aria-hidden="true"></i>
+                      <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                      <i class="fa fa-star-o" aria-hidden="true"></i>
+                    </span>
+
+
+                    <button type="button" class="btn btn-dark" style="border-radius: 20; border: 0;"
+                      onclick="addtocart('{{this._id}}')">Add to Cart</button>
+
+                    <i class="fa-solid fa-heart float-end" id="wish" style="font-size: xx-large; color: rgb(0, 0, 0);;"
+                      onclick="addToWishlist('{{this._id}}')"></i>
+
+
+
+                  </div>
+                </div>
+              </div>
+              {{/each}}
+            </div>
+          </div>
+        </section>
+        <br>
+        <br>
+        <!-- Start Footer -->
+        <footer class="bg-dark" id="tempaltemo_footer">
+          <div class="container">
+            <div class="row">
+
+              <div class="col-md-4 pt-5">
+                <h2 class="h2 text-success border-bottom pb-3 border-light logo">Watch maniac</h2>
+                <ul class="list-unstyled text-light footer-link-list">
+                  <li>
+                    <i class="fas fa-map-marker-alt fa-fw"></i>
+                    123 Consectetur at ligula 10660
+                  </li>
+                  <li>
+                    <i class="fa fa-phone fa-fw"></i>
+                    <a class="text-decoration-none" href="tel:010-020-0340">010-020-0340</a>
+                  </li>
+                  <li>
+                    <i class="fa fa-envelope fa-fw"></i>
+                    <a class="text-decoration-none" href="mailto:info@company.com">watchmaniacc@company.com</a>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="col-md-4 pt-5">
+                <h2 class="h2 text-light border-bottom pb-3 border-light">Products</h2>
+                <ul class="list-unstyled text-light footer-link-list">
+                  <li><a class="text-decoration-none" href="#">Luxury</a></li>
+                  <li><a class="text-decoration-none" href="#">Sport Watch</a></li>
+                  <li><a class="text-decoration-none" href="#">Men's watch</a></li>
+                  <li><a class="text-decoration-none" href="#">Women's watchs</a></li>
+                  {{!-- <li><a class="text-decoration-none" href="#">Popular Dress</a></li> --}}
+                  {{!-- <li><a class="text-decoration-none" href="#">Gym Accessories</a></li> --}}
+                  <li><a class="text-decoration-none" href="#">Sport Watch</a></li>
+                </ul>
+              </div>
+
+              <div class="col-md-4 pt-5">
+                <h2 class="h2 text-light border-bottom pb-3 border-light">Further Info</h2>
+                <ul class="list-unstyled text-light footer-link-list">
+                  <li><a class="text-decoration-none" href="#">Home</a></li>
+                  <li><a class="text-decoration-none" href="#">About Us</a></li>
+                  <li><a class="text-decoration-none" href="#">Shop Locations</a></li>
+                  <li><a class="text-decoration-none" href="#">FAQs</a></li>
+                  <li><a class="text-decoration-none" href="#">Contact</a></li>
+                </ul>
+              </div>
+
+            </div>
+
+            <div class="row text-light mb-4">
+              <div class="col-12 mb-3">
+                <div class="w-100 my-3 border-top border-light"></div>
+              </div>
+              <div class="col-auto me-auto">
+                <ul class="list-inline text-left footer-icons">
+                  <li class="list-inline-item border border-light rounded-circle text-center">
+                    <a class="text-light text-decoration-none" target="_blank" href="http://facebook.com/"><i
+                        class="fab fa-facebook-f fa-lg fa-fw"></i></a>
+                  </li>
+                  <li class="list-inline-item border border-light rounded-circle text-center">
+                    <a class="text-light text-decoration-none" target="_blank" href="https://www.instagram.com/"><i
+                        class="fab fa-instagram fa-lg fa-fw"></i></a>
+                  </li>
+                  <li class="list-inline-item border border-light rounded-circle text-center">
+                    <a class="text-light text-decoration-none" target="_blank" href="https://twitter.com/"><i
+                        class="fab fa-twitter fa-lg fa-fw"></i></a>
+                  </li>
+                  <li class="list-inline-item border border-light rounded-circle text-center">
+                    <a class="text-light text-decoration-none" target="_blank" href="https://www.linkedin.com/"><i
+                        class="fab fa-linkedin fa-lg fa-fw"></i></a>
+                  </li>
+                </ul>
+              </div>
+              <div class="col-auto">
+                <label class="sr-only" for="subscribeEmail">Email address</label>
+                <div class="input-group mb-2">
+                  <input type="text" class="form-control bg-dark border-light" id="subscribeEmail"
+                    placeholder="Email address">
+                  <div class="input-group-text btn-success text-light">Subscribe</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="w-100 bg-black py-3">
+            <div class="container">
+              <div class="row pt-2">
+                <div class="col-12">
+                  <p class="text-left text-light">
+                    Copyright &copy; 2021 Company Name
+                    | Designed by <a rel="sponsored" href="https://templatemo.com" target="_blank">TemplateMo</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </footer>
+        <!-- End Footer -->
+
+        <!-- Start Script -->
+        <script src="assets/js/jquery-1.11.0.min.js"></script>
+        <script src="assets/js/jquery-migrate-1.2.1.min.js"></script>
+        <script src="assets/js/bootstrap.bundle.min.js"></script>
+        <script src="assets/js/templatemo.js"></script>
+        <script src="assets/js/custom.js"></script>
+        <!-- End Script -->
+        </body>
+        <style>
+          .card:hover {
+            box-shadow: rgba(100, 100, 111, 0.5) 0px 7px 29px 0px;
+            transition-duration: .6s;
+          }
+
+          .btn1 {
+            display: inline-block;
+            background:
+              #0d6efd;
+            color: #ffffff;
+            padding: 8px 30px;
+            margin: 17px 0;
+            border-radius:
+              30px;
+            text-decoration: none;
+          }
+
+          .btn1:hover {
+            color: #0d6efd;
+            background:
+              #ffffff;
+          }
+
+          #wish {
+            cursor: pointer
+          }
+
+
+
+
+
+
+          // Boring Stuff
+          body {
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+        </style>

@@ -1,0 +1,48 @@
+<body>
+  <section class="container" style="text-align: center; margin-top: 3rem;">
+    <h1 style="opacity: 80%;">login</h1>
+  </section>
+  <section class="container" style="width:30rem ;">
+
+
+    <form action="/login" method="post">
+      <div class="mb-3">
+        {{#if loginErr}}
+        <h5 class="err" style="color: rgb(250, 6, 6)" ;>{{loginErr}}</h5>
+        {{/if}}
+        <label for="exampleInputEmail1" class="form-label">Email address</label>
+
+        <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+          required>
+
+
+        <div id="emailHelp" class="form-text">Do login with registered mail address</div>
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Password</label>
+        <input type="password" name="password" class="form-control" id="exampleInputPassword1" required>
+      </div>
+
+      <button type="submit" class="btn btn-dark">Submit</button>
+    </form>
+  </section>
+
+
+
+
+
+  <section>
+    <a style="display: flex; flex-direction: row; justify-content: center; text-decoration: none; color: black;"
+      href="/signup">Click here to Create an account</a>
+    <a style="display: flex; flex-direction: row; justify-content: center; text-decoration: none; color: black;"
+      href="/users/otp-login">Forgot password</a>
+  </section>
+</body>
+<!-- Buy me a coffe script -->
+<script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js"
+  data-id="vbattalshn" data-description="Support me on Buy me a coffee!" data-message="" data-color="#5F7FFF"
+  data-position="Right" data-x_margin="18" data-y_margin="18"></script>
+</body>
+
+
+<style>

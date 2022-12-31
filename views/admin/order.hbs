@@ -1,0 +1,183 @@
+<div class="background pb-3" style="margin-left: 7%;
+    width: 90%;">
+    <div class="" style=" vh-100">
+        <a class="navbar-brand mt-4" style="font-family: none; font-weight: 900; color: black;">
+            <h1 class="text-center pt-5">Orders</h1>
+        </a>
+        <div class="d-flex justify-content-center">
+            <div class="row mb-3 mt-4 ms-3">
+                <table class="table table-hover table-bordered ms-2 mt-2" id="orders">
+                    <thead>
+                        <tr>
+                            <th>No:</th>
+                            <th>order ID</th>
+                            <th>Products</th>
+                            {{!-- <th>Brand</th> --}}
+                            <th>Price</th>
+                            {{!-- <th>Date</th> --}}
+                            <th>Payment</th>
+                            <th>Address</th>
+                            <th>Status</th>
+                            <th>Options</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each orderItems}}
+                        <tr>
+                            <td class="align-middle fw-b">{{inc @index}}</td>
+                            <td>
+                                {{!-- <img style="width:70px; height:70px;" src="{{this.product.image.[0]}}" alt=""> --}}
+                                <p>{{this._id}}</p>
+                                <br>
+                                <p>{{this.date}}</p>
+                            </td>
+                            <td class="align-middle fw-b">
+                                {{#each this.products}}
+                                {{this.name}}
+                                <br>
+                                {{/each}}
+
+                            </td>
+                            <td class="align-middle fw-b">{{this.totalAmount}}</td>
+                            <td class="align-middle fw-b">{{this.paymentMethod}}</td>
+
+                            {{!-- <td class="align-middle fw-b">{{this.product.category}}</td> --}}
+                            {{!-- <td class="align-middle fw-b">{{this.date}}</td> --}}
+                            <td class="align-middle fw-b">
+                                {{this.deliveryDetails.fullname}}
+                                <br>
+                                 {{this.deliveryDetails.address}}
+                                 <br>
+                                 {{this.deliveryDetails.mobile}}
+                                </td>
+                           
+                           
+                            <td class="order-data align-middle fw-b" id="{{this._id}}">
+                                {{this.status}}</td>
+
+
+                                
+                            <td class="align-middle fw-b" id="select">
+
+
+                                {{#ifCheck status 'delivered'}}
+                                <option value="delivered">Delivered</option>
+                                {{/ifCheck}}
+                               
+                               
+                                {{#ifCheck status 'canceled'}}
+                                <option value="canceled">Cancelled</option>
+                                {{/ifCheck}}
+                               
+                               
+                                {{#ifCheck status 'placed'}}
+                                <select class="form-control" id="{{this._id}}1"  onchange="statusChange('{{this._id}}')" style="width: 90px;">
+                                    <option selected="true" disabled="disabled" style="background-color: blue; color: white;">
+                                        {{this.status}}</option>
+                                    <option value="shipped">Shipped</option>
+                                    <option value="delivered">Delivered</option>
+                                    <option value="canceled">Canceled</option>
+                                </select>
+                                {{/ifCheck}}
+                               
+                               
+                               
+                                {{#ifCheck status 'pending'}}
+                                <select class="form-control" id="{{this._id}}1" onchange="statusChange('{{this._id}}')" style="width: 90px;">
+                                    <option selected="true" disabled="disabled"
+                                        style="background-color: blue; color: white;" >
+                                        {{this.status}}</option>
+                                    {{!-- <option value="pending">Pending</option> --}}
+                                    <option value="placed">Placed</option>
+                                    <option value="shipped">Shipped</option>
+                                    <option value="delivered">Delivered</option>
+                                    <option value="canceled">Canceled</option>
+                                </select>
+                                {{/ifCheck}}
+                               
+                               
+                                {{#ifCheck status 'shipped'}}
+                                <select class="form-control" id="{{this._id}}1"
+                                    onchange="statusChange('{{this._id}}')" style="width: 90px;">
+                                    <option selected="true" disabled="disabled"
+                                        style="background-color: blue; color: white;">
+                                        {{this.status}}</option>
+                                    <option value="delivered">Delivered</option>
+                                    <option value="canceled">Canceled</option>
+                                </select>
+                                {{/ifCheck}}
+                           
+                           
+                            </td>
+                            {{!-- <td>
+                                <select class="form-control" id="{{this.product._id}}{{this._id}}"
+                                    onchange="statusChange('{{this.product._id}}','{{this._id}}')" style="width: 90px;">
+                                    <option selected="true" disabled="disabled"
+                                        style="background-color: blue; color: white;">
+                                        {{this.status}}</option>
+                                    <option value="pending">Pending</option>
+                                    <option value="placed">Placed</option>
+                                    <option value="shipped">Shipped</option>
+                                    <option value="delivered">Delivered</option>
+                                    <option value="canceled">Canceled</option>
+                                </select>
+                            </td> --}}
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+        <ul class="pagination justify-content-end">
+            {{#each pageCount}}
+            <li class="page-item"><a class="page-link" href="/admin/orders?page={{this}}">{{this}}</a></li>
+            {{/each}}
+        </ul>
+
+{{!-- 
+        <script>
+            //ADMIN ORDER STATUS
+            function statusChange( orderId, status) {
+                console.log('ccccccccccoooooooooo---------------')
+                var status = document.getElementById(prodId + orderId).value;
+                swal({
+                    title: "Are you sure?",
+                    text: "Do you want to " + status + " the order",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Yes, " + status + " it!",
+                    cancelButtonText: "No!",
+                    closeOnConfirm: true,
+                    closeOnCancel: true
+                },
+                    function (isConfirm) {
+                        if (isConfirm) {
+                            $.ajax({
+                                url: '/admin/order-status',
+                                data: {
+                                    orderId,
+                                    status
+                                },
+                                method: 'post',
+                                success: (response) => {
+                                    if (response.status) {
+                                        document.getElementById(orderId + prodId).innerHTML = status
+                                        if (status == 'pending' || status == 'placed' || status == 'shipped' || status == 'delivered' || status == 'canceled') {
+                                            location.reload()
+                                        }
+                                    }
+                                }
+                            })
+                        } else {
+                            location.reload()
+                        }
+                    }
+                );
+            }
+
+            $(document).ready(function () {
+                $('#orders').DataTable();
+            });
+        </script> --}}

@@ -1,0 +1,74 @@
+<section class="vh-100 gradient-custom">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                <div class="card bg-dark text-white" style="border-radius: 1rem;">
+                    <div class="card-body p-5 text-center"
+                        style="font-family: monospace; box-shadow: rgba(100, 100, 111, 0.5)6px 7px 6px 1px; border-radius: 10px 10px 10px 10px;">
+
+                        <div class="mb-md-5 mt-md-4 pb-5">
+                            <div class=" d-flex justify-content-center">
+                                <h2 class="fw-bold ">Alertzy</h2>
+                            </div>
+                            <h2 class="fw-600 mb-2 ">OTP Verification</h2>
+                            <p class="text-white-50 mb-5">Please enter your otp recieved on your device</p>
+
+                            <form onsubmit="return otpValidation()" action="/users/otp-verification" method="post">
+                                <div class="error"></div>
+                                <label for="">OTP</label><br>
+                                <input type="hidden" value="{{phone}}" name="mobile" id=""> <br>
+                                <div class="inputs d-flex  "><input class=" text-center form-control rounded"
+                                        type="text" name="otp" id="otp" maxlength="6" /></div>
+                                <button type="submit" class="btn btn-primary mt-3">Submit</button>
+                            </form>
+                            <p> Resend OTP After <span id="countdowntimer">60 </span> Seconds</p>
+                            <a id="resendbtn" href="/user/resendOtp/{{phone}}" class="resend" style="display: none;">
+                                Resend OTP
+                                <i class="fa fa-caret-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    var timeleft = 20;
+    var downloadTimer = setInterval(function () {
+        timeleft--;
+        document.getElementById("countdowntimer").textContent = timeleft;
+        if (timeleft <= 0)
+            clearInterval(downloadTimer);
+    }, 1000);
+
+
+    setTimeout(function () {
+        let btn = document.getElementById('resendbtn')
+        document.getElementById('resendbtn').style.display = ""
+        btn.setAttribute('href', "/users/resendOtp/" + {{ phone }}
+
+    )
+    btn.textContent = 'Resend'
+    div.appendChild(btn)
+    document.body.appendChild(div)
+
+    }, 6000)
+
+
+
+    const inputFields = document.querySelectorAll("input.field");
+
+    inputFields.forEach((field) => {
+        field.addEventListener("input", handleInput);
+    });
+
+    function handleInput(e) {
+        let inputField = e.target;
+        if (inputField.value.length >= 1) {
+            let nextField = inputField.nextElementSibling;
+            return nextField && nextField.focus();
+        }
+    }
+
+</script>

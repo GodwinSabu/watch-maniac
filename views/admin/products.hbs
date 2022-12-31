@@ -1,0 +1,112 @@
+<div class="background pb-3" style="    margin-left: 7%;
+    width: 85%;">
+  <div class="" style=" vh-100">
+
+    <a class="navbar-brand mt-4" style="font-family: none; font-weight: 900; color: black;">
+      <h1 class="text-center pt-5">Products</h1>
+    </a>
+    <div class="add d-flex justify-content-end">
+      <a href="/admin/add-product" class="btn btn-primary ms-auto">Add Product</a>
+    </div>
+    <div class="d-flex justify-content-center">
+      {{!-- <form class="d-flex">
+        <input class="form-control me-1" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-primary" type="submit">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+      </form> --}}
+
+      <div class="row mb-3 mt-4 ms-3">
+
+        <table id="example" class="table table-hover table-bordered ms-5" style="width:100%">
+          <thead>
+            <tr>
+              <th scope="col">No</th>
+              <th scope="col">Name</th>
+              {{!-- <th scope="col">Barnd</th> --}}
+              <th scope="col">Stock</th>
+              <th scope="col">Category</th>
+              <th scope="col">Price</th>
+              <th scope="col">Offer price</th>
+              <th scope="col">Image</th>
+              <th scope="col">Edit</th>
+              <th scope="col">Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each products}}
+            <tr>
+              <th scope="row">{{inc @index}}</th>
+              <td class="align-middle fw-b">{{this.name}}</td>
+              {{!-- <td class="align-middle fw-b">{{this.brand}}</td> --}}
+              <td class="align-middle fw-b">{{this.stock}}</td>
+              <td class="align-middle fw-b">{{this.category}}</td>
+              <td class="align-middle fw-b">{{this.price}}</td>
+                {{#if this.offerPrice}}
+              <td class="align-middle fw-b">{{this.offerPrice}}</td>
+              {{else}}
+              <td class="align-middle fw-b">No Offer</td>
+              {{/if}}
+              {{!-- <td class="align-middle fw-b">{{this.category}}</td> --}}
+              <td><img style="width:60px; height:50px;" src="{{this.image.[0]}}" alt=""
+              style="border: 5px;border-color: black;">
+
+            <img style="width:60px; height:50px;" src="{{this.image.[1]}}" alt=""
+              style="border: 5px;border-color: black;">
+            <br>
+            <img style="width:60px; height:50px;" src="{{this.image.[2]}}" alt=""
+              style="border: 5px;border-color: black;">
+            <img style="width:60px; height:50px;" src="{{this.image.[3]}}" alt=""
+              style="border: 5px;border-color: black;">
+          </td>
+              <td><a href="/admin/edit-product/{{this._id}}" class="btn btn-primary">edit</a></td>
+              <td><button onclick="deleteProduct('{{this._id}}')" style="border: 0;"> <i class="fa-solid fa-trash"
+                    style="font-size:20px; color: rgb(231, 11, 11);"></i>
+
+
+
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+
+
+  //DELETE PRODUCT
+  function deleteProduct(prodId) {
+    swal({
+      title: "Are you sure?",
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "red",
+      confirmButtonText: "Yes",
+      cancelButtonText: "No",
+      closeOnConfirm: false,
+      closeOnCancel: true
+    },
+      function (isConfirm) {
+        if (isConfirm) {
+          $.ajax({
+            url: '/admin/delete-product/' + prodId,
+            method: 'get',
+            success: (response) => {
+              if (response) {
+                location.reload()
+              }
+            }
+          })
+        }
+      }
+    );
+  }
+
+  $(document).ready(function () {
+    $('#example').DataTable();
+  });
+</script>
