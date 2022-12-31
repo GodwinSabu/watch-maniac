@@ -47,7 +47,7 @@ module.exports = {
             // new one
             let frdReferal = await db.get().collection(collection.USER_COLLECTION).findOne({ 'referal': userData.referralCode })
             console.log(frdReferal, 'kkkkkkkkkkkkkkkkkkkkkkkkffffffffffffffffrrrrrrrrrrrrrrrrrreeeeeeeeeeeeeennnnnnnnnnnnnnnnddddddddddddddddddddddd');
-            if (frdReferal !== 0) {
+            if (frdReferal !== null) {
                 console.log('corect refereal');
                 let sinReferral = {
                     orderId: new ObjectID(),
