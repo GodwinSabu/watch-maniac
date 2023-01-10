@@ -280,15 +280,21 @@ function addToWishlist(proId) {
     method: 'get',
     success: (response) => {
       if (response.status) {
+        location.reload()
         document.getElementById('add' + proId).classList.add("d-none")
         document.getElementById('remove' + proId).classList.remove("d-none")
       } else {
+        location.reload()
         document.getElementById('remove' + proId).classList.add("d-none")
         document.getElementById('add' + proId).classList.remove("d-none")
       }
     }
   })
 }
+
+
+
+
 
 //ADD COUPON
 $("#addCoupon").submit((e) => {

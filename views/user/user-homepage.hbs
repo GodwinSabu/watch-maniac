@@ -323,19 +323,20 @@
           </div>
           <div class="container mt-3">
             <div class="row">
-              {{#each products}}
+
+              {{#each Products}}
               <div class="col-lg-3 col-md-6 col-sm-12 ">
                 <div class="card" style="width: 14rem; margin-top:25px;">
                   <div class="position-relative bg-light overflow-hidden">
                     <img style="width:180px; height:180px;" src="{{this.image.[0]}}" class="card-img-top mx-auto mt-3"
                       alt="..." />
-                    {{#if this.currentOffer}}
+                    {{!-- {{#if this.currentOffer}}
                     <div class="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-2">
                       {{this.currentOffer}}% off</div>
                     {{else}}
                     <div class="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-2">
                       0% off</div>
-                    {{/if}}
+                    {{/if}} --}}
                   </div>
                   {{!-- <img style="width:180px; height:180px;" src="{{this.image.[0]}}"
                     class="card-img-top mx-auto mt-3" alt="..." /> --}}
@@ -345,29 +346,76 @@
                       style="text-decoration: none; color: black;">{{this.name}}</a>
                     <a style="text-decoration: none;" href="/product-details/{{this._id}}">
                       <h5>{{this.product}}</h5>
+                      
                     </a>
-                    <p class="mb-0" style="text-decoration :line-through;">₹{{this.price}}</p>
+
+                    {{#ifCheck this.offerPrice this.offerprice}}
+                    <br>
+                    <br>
+
+                    <h5 class="mb-0" >₹{{this.price}}</h5>
+                    {{else}}
+
+                   <p class="mb-0" style="text-decoration :line-through;">₹{{this.price}}</p>
+                    <h5>₹{{this.offerPrice}}</h5>
+                    {{/ifCheck}}
+
+
+{{!-- 
                     {{#if this.offerPrice}}
                     <h5>₹{{this.offerPrice}}</h5>
                     {{else}}
                     <h5>₹{{this.price}}</h5>
-                    {{/if}}
+                    {{/if}} --}}
 
-                    <span class="hint-star star">
+                    {{!-- <span class="hint-star star">
                       <i class="fa fa-star" aria-hidden="true"></i>
                       <i class="fa fa-star" aria-hidden="true"></i>
                       <i class="fa fa-star" aria-hidden="true"></i>
                       <i class="fa fa-star-half-o" aria-hidden="true"></i>
                       <i class="fa fa-star-o" aria-hidden="true"></i>
-                    </span>
+                    </span> --}}
 
-
+                    <br>
                     <button type="button" class="btn btn-dark" style="border-radius: 20; border: 0;"
                       onclick="addtocart('{{this._id}}')">Add to Cart</button>
 
-                    <i class="fa-solid fa-heart float-end" id="wish" style="font-size: xx-large; color: rgb(0, 0, 0);;"
-                      onclick="addToWishlist('{{this._id}}')"></i>
 
+
+
+                    {{!-- <i class="fa-solid fa-heart float-end" id="wish"
+                      style="font-size: xx-large; color: rgb(0, 0, 0);;" onclick="addToWishlist('{{this._id}}')"></i>
+                    --}}
+
+
+
+
+                    {{#if ../user}}
+                    {{#if this.wishlist}}
+                    <i class="fa-solid fa-heart float-end" id="heart" style="font-size: xx-large; color:red;"
+                      onclick="addToWishlist('{{this._id}}')"></i>
+                    {{else}}
+                    <i class="fa-solid fa-heart float-end" style="font-size: xx-large; "
+                      onclick="addToWishlist('{{this._id}}')"></i>
+                    {{/if}}
+                    {{else}}
+                    <i class="fa-solid fa-heart float-end" style="font-size: xx-large;"><a href="/login"></a></i>
+                    {{/if}}
+                    {{!-- {{#if this.wishlist}}
+                    <span class="card-action">
+                      <a class="btn btn-xs btn-circle btn-white-primary" href="addtoWishlist('{{this._id}}')" id="heart"
+                        data-toggle="button">
+                        ❤️
+                      </a>
+                    </span>
+                    {{else}}
+                    <span class="card-action">
+                      <a class="btn btn-xs btn-circle btn-white-primary" href="" addtoWishlist('{{this._id}}')"
+                        data-toggle="button">
+                        <i class="fe fe-heart"></i>
+                      </a>
+                    </span>
+                    {{/if}} --}}
 
 
                   </div>

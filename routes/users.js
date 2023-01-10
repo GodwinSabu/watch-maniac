@@ -22,10 +22,29 @@ router.get('/home', async function (req, res) {
   }
   let banner = await adminHelpers.getBanner()
   let category = await productHelpers.getCategory()
-  productHelpers.getAllProducts().then((products) => {
-    let user = req.session.user;
-    res.render('user/user-homepage', { user, products, category, banner, cartCount, user: true });
-  })
+  // productHelpers.getAllProducts().then((products) => {
+  //   let user = req.session.user;
+  //   res.render('user/user-homepage', { user, products, category, banner, cartCount, user: true });
+  // })
+
+  let Products= await productHelpers.getAllProducts()
+  let wishlist= await userHelpers.getWishlistlove(req.session.user._id)
+console.log(wishlist,'---------------------------------');
+  if (wishlist) {
+    if (wishlist[0].products.length > 0) {
+      for(let i=0;i<Products.length;i++){
+        for(let j=0;j<wishlist[0].products.length;j++){
+          let productId= Products[i]._id.toString()
+          let item = wishlist[0].products[j].item.toString()
+          if(productId===item){
+            Products[i].wishlist='true'
+          }
+        }
+      }
+    }
+  }
+  let user = req.session.user;
+  res.render('user/user-homepage', { user, Products, category, banner, cartCount, user: true });
 });
 
 //USER LOGOUT
@@ -201,16 +220,28 @@ router.get('/add-to-wishlist/:id', (req, res) => {
     res.json({ status: true })
   }).catch((response) => {
     res.json({ status: false })
-  })
+  })  
 })
 
 //DELETE WISHLIST PRODUCT
 router.get('/delete-wish-product/:id', (req, res) => {
+  console.log();
+  console.log('llllllllllllllll--==========================================================');
   userHelpers.deleteProductFromWish(req.params.id, req.session.user._id).then(() => {
-    res.redirect('/wishlist')
+    res.redirect('/users/wishlist')
   })
 })
 
+
+//wishlist remove ri
+
+// router.post('/wishlist-product-remove', (req, res, next) => {
+//   // console.log('heeeeeeeeelllllloooooooooo');
+//   // console.log(req.body);
+//   userHelpers.deleteProductFromWish(req.body).then((response) => {
+//     res.json(response)
+//   })
+// })
 
 //DELETE PRODUCT FROM CART
 
@@ -219,6 +250,9 @@ router.get("/delete-cart-product/:id", (req, res) => {
       res.json({ status: true })
     });
 });
+
+
+
 
 // COUPON
 router.post('/redeem-coupon', async (req, res) => {

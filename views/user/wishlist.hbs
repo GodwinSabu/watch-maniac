@@ -35,7 +35,7 @@
 
                     <td class="text-center">
                         <a class="btn btn-sm btn-outline-danger"
-                            href="/delete-wish-product/{{this.product._id}}?_method=DELETE" data-mdb-toggle="tooltip"
+                            href="/users/delete-wish-product/{{this.product._id}}" data-mdb-toggle="tooltip"
                             title="Remove item">Clear Wishlist</a><br>
                         <a class="btn btn-sm btn-outline-primary mt-3" onclick="addToCart('{{this.product._id}}')">Add
                             to
@@ -483,3 +483,27 @@
         font-size: 1.1em;
     }
 </style>
+<script>
+    // remove product from wishlist
+function wishlistRemovePro(wishlistId, proId) {
+    $.ajax({
+        url: '/wishlist-product-remove',
+        data: {
+            wishlist: wishlistId,
+            product: proId
+        },
+        method: 'post',
+        success: (response) => {
+            if (response.removeProduct) {
+                alert('Product Removed from wishlist')
+                location.reload() //to refresh the page after we remove the product
+            } else {
+                // document.getElementById(proId).value = quantity + count
+            }
+        }
+    })
+    
+
+}
+
+</script>

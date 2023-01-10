@@ -68,13 +68,15 @@
                                         </a>
 
 
-                                        {{#if this.offerprice}}
+                                        {{#ifCheck this.offerPrice this.offerprice}}
+                                        <br>
+
+                                        <h5 class="mb-0">₹{{this.price}}</h5>
+                                        {{else}}
 
                                         <p class="mb-0" style="text-decoration :line-through;">₹{{this.price}}</p>
-                                        <h5>₹{{this.offerprice}}</h5>
-                                        {{else}}
-                                        <h5>₹{{this.price}}</h5>
-                                        {{/if}}
+                                        <h5>₹{{this.offerPrice}}</h5>
+                                        {{/ifCheck}}
 
 
 

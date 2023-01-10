@@ -427,7 +427,7 @@ module.exports = {
                 {
                     $group: {
                         _id: null,
-                        total: { $sum: { $multiply: [{ $toInt: '$quantity' }, { $toInt: '$product.offerprice' }] } }
+                        total: { $sum: { $multiply: [{ $toInt: '$quantity' }, { $toInt: '$product.offerPrice' }] } }
                     }
                 }
             ]).toArray()
@@ -442,7 +442,7 @@ module.exports = {
                 resolve(response)
 
             })
-        }) 
+        })
     },
 
     //DECREASE WALLET
@@ -621,7 +621,7 @@ module.exports = {
     //USER ORDERS
     getUserOrders: (userId, pagenumber, limit) => {
         return new Promise((resolve, reject) => {
-            let orders = db.get().collection(collection.ORDER_COLLECTION).find({ userId: objectId(userId) }).sort({date:-1}).skip(pagenumber * limit).limit(limit).toArray()
+            let orders = db.get().collection(collection.ORDER_COLLECTION).find({ userId: objectId(userId) }).sort({ date: -1 }).skip(pagenumber * limit).limit(limit).toArray()
             resolve(orders)
 
 
@@ -847,6 +847,14 @@ module.exports = {
             resolve(wishlist)
         })
     },
+    //wishlovw
+    getWishlistlove: (userId) => {
+        return new Promise(async (resolve, reject) => {
+         let wishLove =await db.get().collection(collection.WISHLIST_COLLECTION).find().toArray()
+         resolve(wishLove)
+        })
+
+    },
 
     //WISHLIST COUNT
 
@@ -932,8 +940,8 @@ module.exports = {
             resolve()
         })
     },
-    
-    walletPurchase: (userId, wallet, total,products) => {
+
+    walletPurchase: (userId, wallet, total, products) => {
         return new Promise(async (resolve, reject) => {
             if (wallet.walletBalance >= total) {
                 const obj4 = {
@@ -1067,18 +1075,18 @@ module.exports = {
         return new Promise(async (resolve, reject) => {
             let order = await db.get().collection(collection.ORDER_COLLECTION).findOne({ _id: objectId(orderid) })
             let length = order.products.length
-            console.log(length,'33333333');
-            console.log(order,'//////////222222')
-            console.log(productid,'/////////11');
+            console.log(length, '33333333');
+            console.log(order, '//////////222222')
+            console.log(productid, '/////////11');
 
 
             console.log('---------------');
-            console.log("oooooooooooooooooooooooooooooooooooooooooooooooo",(String)(new objectId(order.products[0].productId)) );
+            console.log("oooooooooooooooooooooooooooooooooooooooooooooooo", (String)(new objectId(order.products[0].productId)));
             console.log('---------------++++++');
 
 
             for (i = 0; i < length; i++) {
-                if( (String)(new objectId(order.products[i].productId)) == objectId(productid)){
+                if ((String)(new objectId(order.products[i].productId)) == objectId(productid)) {
                     console.log("cancel single product matches and cancelled");
                     order.products[i].Cancel = true
                     console.log("product canceled", order.products[i].name);
@@ -1113,7 +1121,7 @@ module.exports = {
                             } console.log("cancel single product matches and cancellednnnnnnnnnnnnnnn");
 
 
-                        }) 
+                        })
                     break
                 }
             }
@@ -1221,50 +1229,50 @@ module.exports = {
     //         })
     //     })
     // }
-    returnSingleProduct : (orderid,productid,id)=>{
-        return new Promise ((resolve,reject)=>{
-          
-          db.get().collection(collection.ORDER_COLLECTION).updateOne({_id:objectId(orderid),"products.productId":objectId(productid)},
-          { $set: {"products.$.Return" : true} }).then(async (response)=>{
-            console.log(response)
-    
-            let order = await db.get().collection(collection.ORDER_COLLECTION).findOne({_id:objectId(orderid)})
-            console.log(order,'--------------------]]');
-            let length = order.products.length
+    returnSingleProduct: (orderid, productid, id) => {
+        return new Promise((resolve, reject) => {
+
+            db.get().collection(collection.ORDER_COLLECTION).updateOne({ _id: objectId(orderid), "products.productId": objectId(productid) },
+                { $set: { "products.$.Return": true } }).then(async (response) => {
+                    console.log(response)
+
+                    let order = await db.get().collection(collection.ORDER_COLLECTION).findOne({ _id: objectId(orderid) })
+                    console.log(order, '--------------------]]');
+                    let length = order.products.length
 
 
-            for(i=0; i < length  ; i++){
-                if( (String)(new objectId(order.products[i].productId)) == objectId(productid)){
+                    for (i = 0; i < length; i++) {
+                        if ((String)(new objectId(order.products[i].productId)) == objectId(productid)) {
 
-                    db.get().collection(collection.ORDER_COLLECTION).updateOne({ _id: objectId(orderid), "products.productId": objectId(productid) },
-                    { $set: { "products.$.Cancel": true, "products.$.Return": true } })
+                            db.get().collection(collection.ORDER_COLLECTION).updateOne({ _id: objectId(orderid), "products.productId": objectId(productid) },
+                                { $set: { "products.$.Cancel": true, "products.$.Return": true } })
 
-                    order.products[i].Return = true
-                }
-            }
-            
+                            order.products[i].Return = true
+                        }
+                    }
 
 
-            let NOTreturn  = false
 
-            for(j=0 ; j< length; j++){
+                    let NOTreturn = false
 
-                if ( order.products[j].Return  == false  ) {
-                    NOTreturn= true
-                    break;
-                }
-            }
+                    for (j = 0; j < length; j++) {
 
-            if (NOTreturn) {
-                console.log('complete not orser return');
-            } else {
-               await db.get().collection(collection.ORDER_COLLECTION).updateOne({ _id: objectId(orderid) }, { $set: { "status": "return" } })
-            }
-    
-    
-    
-            resolve()
-          })
+                        if (order.products[j].Return == false) {
+                            NOTreturn = true
+                            break;
+                        }
+                    }
+
+                    if (NOTreturn) {
+                        console.log('complete not orser return');
+                    } else {
+                        await db.get().collection(collection.ORDER_COLLECTION).updateOne({ _id: objectId(orderid) }, { $set: { "status": "return" } })
+                    }
+
+
+
+                    resolve()
+                })
         })
     },
 
